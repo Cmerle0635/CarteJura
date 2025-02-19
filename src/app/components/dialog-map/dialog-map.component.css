@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+}
+
+.map-container {
+    flex-grow: 1;
+}
+
+*{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

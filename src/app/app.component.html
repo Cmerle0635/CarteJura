@@ -1,0 +1,38 @@
+
+<main class="main">
+  <button id="BtnCarte" mat-raised-button color="primary" (click)="openDialog()">
+    <b>Ouvrir la carte</b>
+  </button>
+  <div id="info">Cartographie</div>
+  <div id="Title">La guerre des points d'eau dans le Jura !!!</div>
+  <div id="info">Par Clément MERLE / Le 02-01-2025</div>
+  <div id="Summary">Ce premier article présente une petite étude que j'ai faite sur la réparition des différents points d'eau sur l'EPCI de la Station des Rousses dans le Jura (59).</div>
+  <div class="container">
+    <img src="https://live.staticflickr.com/454/32000466395_50f76cdae9_b.jpg" alt="Nature" style="width:100%;">
+    <div class="text-block">
+      <p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/63127193@N06/32000466395">Creux du Croue - Jura (30.12.16) 46</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/63127193@N06">rouilleralain</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse">CC BY-SA 2.0 <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /><img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /></a>.</p>
+    </div>
+  </div>
+  <div id="content">
+    <p>Depuis quelques temps maintenant, je voulais faire un projet perso sur l'une de mes passions, la géomatique. 
+      Travaillant récemment avec un algorythme servant à créer des Polygones de Voronoï, cela m'a donné une idée, 
+      faire une carte de proximité à l'aide de ces derniers, tout en se servant d'un Path Finding.</p>
+    <p>Aimant bien aussi la randonnée, je voulais partir sur quelque chose en lien avec cette autre passion, mais qui n'était pas quelque chose de commercial, 
+      (tout en étant accessible en open-source ... A revoir). L'idée à la base était donc de partir sur une <b>"guerre des bancs"</b> (Trouver quels étaient les bancs les plus accessibles 
+      au plus grand nombre de personnes). Néanmoins, du fait qu'il y a énormément de bancs, j'ai décidé de prendre un autre élément non-commercial ... <b>les points d'eau.</b></p>
+    <p>En cherchant différentes EPCI, sur laquelle faire cette étude, je me suis finalement arrêté sur celle de la <b>Communauté de Communes de la Station des Rousses-Haut Jura</b>,
+       dans le Jura. Si vous vous posez la question, pourquoi cette dernière et voici les différents points qui m'ont motivé à la choisir :</p>
+    <ul>
+      <li>Faible nombre de points d'eau (4), cela permettra de faire une carte, nettement plus lisible.</li>
+      <li>Relativement faible population (Avec 7212 habitants en 2021, c'était la 2ème EPCI la moins peuplée du département et au niveau national (Hors DROM-COM), 
+        elle se classait à la 1121ème place sur 1231) et étendu (Avec presque 99km², elle était la plus petite EPCI de son département et la 1188 moins étendue de France Métropolitaine (sur 1236)), 
+        cela limite son nombre de routes, donc temps de calcul</li>
+      <li>Le Jura est un département relativement rural et réputé pour la randonnée, cela rentrait parfaitement dans le sujet.</li>
+      <li>Point Bonus : EPCI frontalière avec un autre pays.</li>
+    </ul>
+    <p>Ci-dessous, une carte de localisation de l'EPCI : </p>
+  </div>
+  
+</main>
+
+<router-outlet />
