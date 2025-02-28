@@ -1,18 +1,20 @@
-:host {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-main {
-    display: flex;
-    flex-grow: 1;
-}
-
-.map-container {
-    flex-grow: 1;
-}
-
 *{
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}  
+
+.mat-mdc-dialog-content {
+    max-height: initial;
+}
+
+.test{
+    padding: 10px;
+    display: block;
+    position: absolute;
+    bottom: 30px;
+    top: 30px;
+    right: 30px;
+    height: 90vh - 60px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 25%;
+    word-wrap: break-word;
 }

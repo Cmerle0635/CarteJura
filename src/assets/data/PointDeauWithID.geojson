@@ -1,0 +1,58 @@
+{
+	"type" : "FeatureCollection",
+	"name" : "PointDeau_EPCI_LES_ROUSSES",
+	"features" : [
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 6.0310465994, 46.4632851006 ]
+			},
+			"properties" : {
+				"id_pointeau" : 3,
+				"element_ty" : "node",
+				"osmid" : 8795673624,
+				"amenity" : "drinking_water"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 6.1381831, 46.5350053011 ]
+			},
+			"properties" : {
+				"id_pointeau" : 2,
+				"element_ty" : "node",
+				"osmid" : 9930274517,
+				"amenity" : "drinking_water"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 6.1388428004, 46.5372773005 ]
+			},
+			"properties" : {
+				"id_pointeau" : 1,
+				"element_ty" : "node",
+				"osmid" : 5591567676,
+				"amenity" : "drinking_water"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ 6.0609679994, 46.4862296006 ]
+			},
+			"properties" : {
+				"id_pointeau" : 0,
+				"element_ty" : "node",
+				"osmid" : 7850877754,
+				"amenity" : "drinking_water"
+			}
+		}
+	]
+}

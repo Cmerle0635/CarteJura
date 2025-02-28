@@ -1,0 +1,120 @@
+{
+  "0": {
+    "nom": "Présentation des points d'eau",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/Extent_EPCI.geojson",
+      "nom": "Etendu de l'EPCI",
+      "stroke": {
+        "color": "red",
+        "width": 5
+      },
+      "fill": {
+        "color": "transparent"
+      }
+    },
+    "1": {
+      "type": "Polygon",
+      "url": "/assets/data/Communes.geojson",
+      "nom": "Communes de l'EPCI",
+      "stroke": {
+        "color": "white",
+        "width": 3,
+        "lineDash": [4, 4]
+      },
+      "fill": {
+        "color": "transparent"
+      },
+      "text": {
+        "font": "bold 12px sans-serif",
+        "text": ["nomcom", "Pop"],
+        "color": "white",
+        "stroke": {
+            "color": "black",
+            "width": 3
+        }
+      }
+    },
+    "2": {
+        "type": "Points",
+        "url": "/assets/data/PointDeauWithID.geojson",
+        "nom": "Point d'Eau",
+        "icon": "/assets/images/PointEau0.png",
+        "icon_field": "id_pointeau",
+        "height": 40
+      }
+  },
+  "1":{
+    "nom": "Présentation des routes",
+    "0": {
+        "type": "Polygon",
+        "url": "/assets/data/Extent_EPCI.geojson",
+        "nom": "Etendu de l'EPCI",
+        "stroke": {
+          "color": "red",
+          "width": 5
+        },
+        "fill": {
+          "color": "transparent"
+        }
+      },
+      "1": {
+        "type": "Polygon",
+        "url": "/assets/data/Communes.geojson",
+        "nom": "Communes de l'EPCI",
+        "stroke": {
+          "color": "white",
+          "width": 3,
+          "lineDash": [4, 4]
+        },
+        "fill": {
+          "color": "transparent"
+        },
+        "text": {
+          "font": "bold 12px sans-serif",
+          "text": ["nomcom", "Pop"],
+          "color": "white",
+          "stroke": {
+              "color": "black",
+              "width": 3
+          }
+        },
+      "2": {
+        "type": "Line",
+        "url": "/assets/data/Routes.geojson",
+        "nom": "Routes de l'EPCI",
+        "field": "maxspeed",
+        "stroke": {
+            "2": {
+            "color": "rgba(255,255,178,1)",
+            "width": 1
+            },
+            "5": {
+            "color": "rgba(254,219,117,1)",
+            "width": 2
+            },
+            "30": {
+            "color": "rgba(254,177,78,1)",
+            "width": 3
+            },
+            "40": {
+            "color": "rgba(251,129,56,1)",
+            "width": 4
+            },
+            "50": {
+            "color": "rgba(242,71,36)",
+            "width": 6
+            },
+            "70": {
+            "color": "rgba(211,25,35,1)",
+            "width": 8
+            },
+            "80": {
+            "color": "rgba(158,0,27,1)",
+            "width": 10
+            }
+          }
+      }
+    }
+  }
+}

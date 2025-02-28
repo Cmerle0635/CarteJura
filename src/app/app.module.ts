@@ -7,11 +7,14 @@ import { DialogMapComponent } from './components/dialog-map/dialog-map.component
 import { MapComponent } from './components/map/map.component';
 
 import { AppComponent } from './app.component';
+import { PanelInfoComponent } from './components/panel-info/panel-info.component';
+import { SetLayerService } from './services/set-layer.service';
 
 @NgModule({
   declarations: [
     AppComponent, 
     DialogMapComponent, 
+    PanelInfoComponent,
     MapComponent],
   imports: [
     BrowserModule,
@@ -19,10 +22,9 @@ import { AppComponent } from './app.component';
     MatButtonModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [SetLayerService],
   bootstrap: [
-    AppComponent,
-    MapComponent
+    AppComponent
   ],
 })
 export class AppModule {}
