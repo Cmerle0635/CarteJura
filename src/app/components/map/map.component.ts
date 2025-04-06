@@ -12,7 +12,7 @@ import { SetLayerService } from '../../services/set-layer.service';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.css']
 })
 export class MapComponent {
 
@@ -21,8 +21,6 @@ export class MapComponent {
   constructor(private elementRef: ElementRef, private LayerService: SetLayerService) {}
 
   async initMap(info: number): Promise<void> {
-
-    console.log("Le layer est : " + info);
 
     let MyMap = this.map;
 
@@ -74,6 +72,8 @@ export class MapComponent {
     setTimeout(() => {
       MyMap.updateSize();
     }, 300);
+
+    this.LayerService.setMap(MyMap);
 
   }
 }

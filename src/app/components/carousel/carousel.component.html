@@ -1,0 +1,22 @@
+<div class="carousel-container">
+    <!-- Flèche gauche -->
+    <button class="nav-button left" (click)="prevImage()" [disabled]="currentIndex === 0">
+      ◀
+    </button>
+  
+    <!-- Image active -->
+    <div class="image-wrapper">
+      <img [src]="images[currentIndex]" class="carousel-img" (click)="openDialogImage($event)">
+    </div>
+  
+    <!-- Flèche droite -->
+    <button class="nav-button right" (click)="nextImage()" [disabled]="currentIndex === images.length - 1">
+      ▶
+    </button>
+  
+    <!-- Indicateur de position -->
+    <div class="indicator">
+      {{ currentIndex + 1 }} / {{ images.length }}
+    </div>
+  </div>
+  

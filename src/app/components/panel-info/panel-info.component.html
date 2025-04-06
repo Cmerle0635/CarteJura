@@ -1,3 +1,18 @@
 <div id="manager">
-    <p>{{info}} §§§</p>
+    <p class="Imp">Sélection de la carte : </p>
+    <mat-select [formControl]="selected" (selectionChange)="getLayerSelected($event.value)">
+        <mat-option *ngFor="let Field of FieldForFilter" value="{{Field.IDLayer}}">{{Field.NomLayer}}</mat-option>
+    </mat-select>
+    <p class="Imp">Légende : </p>
+    <div *ngFor="let item of data" class="container">
+        <div *ngIf="item.hasSVG; else showImage" class="svg-box" [id]="'svg-container-' + item.id"></div>
+      
+        <ng-template #showImage>
+          <img *ngIf="item.imageUrl" [src]="item.imageUrl" alt="Image" class="image-box">
+        </ng-template>
+      
+        <p [ngStyle]="{ 'font-weight': item.bold ? 'bold' : 'normal',  'font-size':item.size}">
+        {{ item.text }}
+        </p>
+    </div>      
 </div>

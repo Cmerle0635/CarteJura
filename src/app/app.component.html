@@ -1,6 +1,6 @@
 
 <main class="main">
-  <button id="BtnCarte" mat-raised-button color="primary" (click)="openDialog()">
+  <button id="BtnCarte" mat-raised-button color="primary" (click)="openDialogMap()">
     <b>Ouvrir la carte</b>
   </button>
   <div #element1 id="1"></div>
@@ -14,7 +14,7 @@
       <p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/63127193@N06/32000466395">Creux du Croue - Jura (30.12.16) 46</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/63127193@N06">rouilleralain</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse">CC BY-SA 2.0 <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /><img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /></a>.</p>
     </div>
   </div>
-  <div id="content">
+  <div class="content">
     <p>Depuis quelques temps maintenant, je voulais faire un projet perso sur l'une de mes passions, la géomatique. 
       Travaillant récemment avec un algorythme servant à créer des Polygones de Voronoï, cela m'a donné une idée, 
       faire une carte de proximité à l'aide de ces derniers, tout en se servant d'un Path Finding.</p>
@@ -28,12 +28,141 @@
       <li>Relativement faible population (Avec 7212 habitants en 2021, c'était la 2ème EPCI la moins peuplée du département et au niveau national (Hors DROM-COM), 
         elle se classait à la 1121ème place sur 1231) et étendu (Avec presque 99km², elle était la plus petite EPCI de son département et la 1188 moins étendue de France Métropolitaine (sur 1236)), 
         cela limite son nombre de routes, donc temps de calcul</li>
-      <li>Le Jura est un département relativement rural et réputé pour la randonnée, cela rentrait parfaitement dans le sujet.</li>
+      <li>Le Jura est un département relativement rural et réputé pour la randonnée, cela rentrait parfaitement dans le sujet sujet et cela permet aussi de mettre en valeur un territoire rural</li>
       <li>Point Bonus : EPCI frontalière avec un autre pays.</li>
+      <li>Point Bonus 2 : A fait partie d’un film récemment passé au cinéma (Un Ours dans le Jura)</li>
     </ul>
     <p #element2 id ="2"></p>
     <p>Ci-dessous, une carte de localisation de l'EPCI : </p>
-  </div>
+    <p class="image-content">
+      <img src="assets/cartes/carte_localisation.png" alt="Carte Localisation" class="image" (click)="openDialogImage($event)">
+    </p>
+    <p>Comme vous avez pu le voir, sur la carte, l'EPCI ne comporte que quatre villes (Ce qui est relativement rare en France (En 2024, 
+      cela concernait 7 avec 4 villes ou moins, donc 2 avec seulement 3 communes) et se concentre surtout autour son siège, la ville des Rousses 
+      (Qui regroupe un peu plus de la moitié des habitants, avec 3683 habitants), connue pour être une station de sport d'Hiver. Etant dans le Jura, 
+      cette communauté de communes est contrasté par son relief. Son point le plus bas est à 720 mètres (Dans la commune des Rousses) et son plus haut, 
+      est quant à lui à 1495m (Commune de Lamoura, avec le Crêt Pela).</p>
+    <p>Une fois ce choix d'EPCI fait, avec l'aide de l'API d'Open Street Map, j'ai téléchargé les différentes données liées aux routes et point d'eau des communes comprises de cette communauté de communes. 
+      Ce qui faisait en tout 4 points d'eau et  2308 éléments pour les routes. Du fait que pas mal, de routes n'avait pas de valeurs "highspeed" 
+      (Et que cela m'intéressait particulièrement, du fait que le futur Path Finding sera pondéré selon cette valeur), 
+      j'ai du faire des modifications dans les données téléchargées pour qu'elles aient une valeur. Voici au final ce que cela donne :</p>
+    <app-chart></app-chart>
+    <p>Et avec deux cartes, c'est encore mieux :</p>
+      <app-carousel [images]='images_carousel1'></app-carousel>
+    <p>
+      D'abrod la première chose que l'on peut voir cette carte, c'est qu'il y a deux points d'eau sur la même commune, celle de Bois d'Amont, cela est un cas plutôt intéressant je trouve, puisque cela va rajouter un peu de concurrence.
+    </p>
+    <p>
+      Ensuite sur les routes, on peut noter différents points :
+    </p>
+    <ul>
+      <li>Réseau assez logique entre les villes de l'EPCI, avec voix relativement rapides (> 50 km/h en majorité) et qui s'articule surtout autour de la commune la plus peuplée de la Communauté de Communes</li>
+      <li>Hors des villes, cela est plutôt l'inverse avec beaucoup de routes à 30km/h (D'ailleurs elles représentes 72% du réseau routier) </li>
+      <li>Plusieurs axes parallèles (D25 / N5 - D29E2 / D415) pouvant faire jouer la concurrence</li>
+    </ul>
+    <p>Une fois que l’on a toutes ces données, il faut les formater afin qu’elle puisse être utilisées 
+      pour pouvoir utiliser un algorithme de path-finding, du fait qu’en les parcourant, je me suis aperçu d’un petit problème. Et avec des schémas, c’est plus sympathique donc voici :</p>
+    <p class="image-content">
+      <img src="assets/schemas/schema_point_section1.png" alt="Schema 1" class="schema">
+    </p>
+    <p>Avec nos différentes routes, on a donc 3 possibles cas qui s’offrent à nous :</p>
+    <ul>
+      <li>Le premier, est celui qui nous plaît le plus, du fait que les 3 chemins se finissent au niveau du même point, 
+        donc cela permet à l’algorithme de passer directement d’un chemin à un autre sans le sauter.
+      </li>
+      <li>Le second, légèrement plus problématique, mais assez facile à gérer est relativement proche du premier, 
+        mais il n’y a pas de liaison entre nos différentes « sections », mais on a quand même un élément qui peut faire la jonction entre nos deux routes. 
+        Il faudra donc juste split notre route au niveau de ce point, afin de revenir à une situation relative à notre premier schéma.
+      </li>
+      <li>
+        Quant au troisième, c’est le plus problématique pour nous du fait qu’ici, aucun élément ne nous permet de faire la jonction entre nos deux routes. 
+        Il faudra donc en créer un, en se basant sur la géométrie de nos éléments.
+      </li>
+    </ul>
+    <p>La question maintenant est … qu’est ce qu’on fait pour gérer cela ?    </p>
+    <p>
+      Dans un premier temps, j’ai parcouru toutes nos routes, afin de prendre tous les points qui les composent et de les rendre unique et supprimer les doublons 
+      (Pour faire cela, j’ai choisi de prendre une tolérance de 1 mètre).
+      Une fois cela fait, j’ai encore une fois parcouru toutes les routes, pour extraire toutes leurs sections, en leur donnant ainsi, une origine et une extrémité avec l’ID de l’un de nos points uniques précédemment créés 
+      (tout en gardant l’ID de la route à la base, ces sections appartenaient).
+      Après cela, j’ai reconstruit mes différentes routes, en m’aidant de mes sections, 
+      mais en m’arrêtant à chaque point, qui se retrouvait à la limite d’au moins trois sections.
+    </p>
+    <p>
+      En conséquence, le cas numéro 2 de notre schéma était maintenant réglé, maintenant il va falloir s’attaquer à notre fameux numéro 3 … mais avant un petit schéma représentant l'étape qui vient d'être faite :
+    </p>
+    <p class="image-content">
+      <img src="assets/schemas/schema_point_section2.png" alt="Schema 1" class="schema">
+    </p>
+    <p>
+      Concernant ce troisième et dernier cas, la première tâche va être de savoir comment joindre ces points à leurs nouvelles lignes ? Dans un premier temps,
+      un tri va être fait, en suivant cette méthodologie, afin d’éliminer un par un les relations points / routes, tout en limitant au maximum le temps de traitement :
+    </p>
+    <ul>
+      <li>La distance du point avec le centroïde de la route route, doit être inférieure à la moitié de la longueur de la route.</li>
+      <li>Les coordonnées du point doivent être inférieures aux XMax / YMax de la route et supérieures aux XMin / YMin.</li>
+      <li>Le point doit se trouver dans la boîte englobante de la route.</li>
+      <li>La distance perpendiculaire du point à la route doit être de mois d’un mètre.</li>
+    </ul>
+    <p>Une fois que l’on a fait cela, il suffit de modifier notre route, en créant un nouveau sur cette dernière, afin de la split en deux.</p>
+    <p>Pour information, en termes de nombre de routes, on passe de :</p>
+    <ul>
+      <li>2276 routes après téléchargement de données de OSM.</li>
+      <li>34019 sections après le découpage à chaque noeud.</li>
+      <li>6364 routes, une fois que l'on a fait le regroupement des sections d'une même route, mais en les splitant dès que leur noeud rencontre 2 autres sections.</li>
+      <li>6988 routes, après avoir traité le cas numéro 3.</li>
+    </ul>
+    <p>Une fois que tous ces pré-traitements ont été réalisés, on peut s'attaquer maintenant au coeur du sujet, 
+      le Path-Finding et la construction de nos zones d'influence.</p>
+    <p>Dans un premier temps, du fait que notre algo de path-finding va se servir à la fois de la maxspeed de nos routes et de la longueur de ces dernières. 
+      Il faut calculer une valeur de temps de trajet pour chacune de nos routes, à l'aide de cette super formule :</p> 
+    <p style="height: 5px"></p>
+    <div class="function">
+      <p>Temps = ( Distance / ( Vitesse Max / 3.6 ) ) / 60</p>
+      <p style="font-size: 10px;">Temps (Minutes), Distance (Mètres), Vitesse Max (Km/h)</p></div>
+    <p style="height: 5px"></p>
+    <p>Une fois que l'on a cette dernière variable, il faut maintenant calculer pour tous nos différents points d'eau, 
+      quel est le noeud de nos routes qu'est le plus proche. Ensuite, on crée un graphique avec tous nos tronçons et enfin, 
+      on lance notre algo de path finding en mettant comme valeur de poids, celle que l'on vient de calculer. Bien entendu, pour chacun de nos noeuds,
+      on lance l'algo 4 fois (une fois par point d'eau) et on garde la valeur la plus faible, pour déterminer quel est le point d'eau le plus proche de notre noeud.
+    </p>
+    <p #element3 id ="3">
+      Une fois que l'on a toutes ces valeurs. A partir de nos différents points, on calcule nos fameux polygones de Voronoï, tout en les limitant leur expansion à la taille de notre EPCI.
+      Quand ces polygones sont créés, on fait une jointure spatiale avec nos points, pour savoir à quel point d'eau, notre polygone appartient et enfin, on merge tous nos polygones suivant leur valeur d'appartenance, 
+      afin d'avoir les fameuses zones d'influences de nos points d'eau, ce qui nous donne cette carte : 
+    </p>
+    <p class="image-content">
+      <img src="assets/cartes/carte_voronoi1.png" alt="Carte Voronoi1" class="image" (click)="openDialogImage($event)">
+    </p>
+    <p>
+      De cet export, on peut déjà tirer plusieurs conclusions :
+    </p>
+    <ul>
+      <li>Il n'y a pas vraiment eu de concurrence entres les points numéro 2 et 3, puisqu'elles étaient beaucoup trop proche pour que cela n'ait lieu et le 2 a pris toute la priorité sur le 3.</li>
+      <li>Le point numéro 4 a su le mieux se développer, du fait qu'il n'y a aucun autre point d'eau au Sud, sur la commune de Lamoura, néanmoins, il a eu d'avantage de concurrence avec le 1, particulièrement au Sud et un peu moins au Nord.</li>
+      <li>Enfin le point numéro 1 a su plutôt bien tirer des avantages de sa centralité.</li>
+    </ul>
+    <p>Et voici quelques cartes, pour encore mieux décrire la situation à la fin de cette étude :</p>
+    <app-carousel [images]='images_carousel2'></app-carousel>
+    <p>Ces différentes cartes peuvent bien entendu, nous éclairer encore un peu plus sur la situation.</p>
+    <ul>
+      <li>
+        La première carte montre le temps d'accès aux points d'eau des différents noeuds, le tout regroupé en cluster. Et on peut voir que plus on s'éloigne de nos axes principaux, plus le temps augmente assez rapidement. 
+        Cela est d'ailleurs le cas pour la zone au Sud entre les points 1/4, car malgré une concurrence assez forte entre ses deux points, le temps pour accéder au point d'eau est relativmeent important, du fait que les routes ne sont pas vraiments directes.
+        L'autre éléments que l'on peut distinguer, est le cas de la commune de Lamoura, du fait qu'elle n'a pas de point d'eau sur son territoire et que le plus proche est celui de la commune de Preymanon, l'ensemble de son territoire a des valeurs relatrivements importantes.
+      </li>
+      <li>
+        La seconde présente le nombre d'occurences minimale (par route) de chaque noeud dans le Path Finding. Plus une valeur est importante, plus elle a donc à servi à étendre l'influence du point d'eau, auquel le noeud est rattaché. 
+        Sans surprise, les routes aux alentours du point d'eau numéro 3 ont des valeurs très faibles. Concernant les autres, on peut voir que le point numéro 3, a su plutôt étendre son territoire à l'aide d'un réseau en étoile, ce qui est plutôt logique du fait que la commune des Rousses est à la fois
+        le siège de l'EPCI, mais aussi sa commune la peuplée, donc celle qui est le mieux reliée au réseau routier. Quant au point numéro 4, du fait que c'est le point avec la plus grande d'influence, rien de surprenant à ce que ses routes aient été utilisés le plus grand nombre et l'axe majoritaire est celui qui va vers la commune de Laomura.
+      </li>
+      <li>
+        Enfin la dernière carte, elle sert à montrer la différence entre un algo de path finding, basé sur une variable de temps (comme vu plus haut) et un autre basé uniquement sur la longueur des routes, donc quel que soit la vitesse à laquelle on se déplace dessus, tant qu'elle est homogène entre toutes les routes. La première chose que l'on peut s'apercevoir ...
+        c'est qu'il n'y a pas une grande différence ... mise à part pour le point 1, qui a su mieux tirer son épingle du jeu, à l'aide de sa place centrale dans l'EPCI et sa proximité avec des routes avec une relativement élevée.
+      </li>
+
+    </ul>
+  </div>  
   
 </main>
 
