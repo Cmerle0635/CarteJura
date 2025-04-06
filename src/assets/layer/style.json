@@ -285,5 +285,84 @@
             }
         }
       }
+  },
+  "5": {
+    "nom": "Comparaison des zones d'infleunce Temps vs Distance",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiTemps.geojson",
+      "nom": "Zone d'influence selon le Temps",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(181,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(212,85,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(34,85,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,125,128,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "rgba(181,0,0,0.3)"
+        },
+        "1":{
+          "color": "rgba(212,85,0,0.3)"
+        },
+        "2":{
+          "color": "rgba(34,85,0,0.3)"
+        },
+        "3":{
+          "color": "rgba(0,125,128,0.3)"
+        }
+      }
+    },
+    "1": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiDistance.geojson",
+      "nom": "Zone d'influence selon la Distance",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(170,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(182,109,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(0,0,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,0,125,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "transparent"
+        },
+        "1":{
+          "color": "transparent"
+        },
+        "2":{
+          "color": "transparent"
+        },
+        "3":{
+          "color": "transparent"
+        }
+      }
+    }
   }
 }
