@@ -1,13 +1,14 @@
 
 <main class="main">
   <button id="BtnCarte" mat-raised-button color="primary" (click)="openDialogMap()">
-    <b>Ouvrir la carte</b>
+    <b>Explorer les cartes</b>
   </button>
+  <app-header></app-header>
   <div #element1 id="1"></div>
   <div id="info">Cartographie</div>
   <div id="Title">La guerre des points d'eau dans le Jura !!!</div>
   <div id="info">Par Clément MERLE / Le 02-01-2025</div>
-  <div id="Summary">Ce premier article présente une petite étude que j'ai faite sur la réparition des différents points d'eau sur l'EPCI de la Station des Rousses dans le Jura (59).</div>
+  <div id="Summary">Ce premier article présente une petite étude que j'ai faite sur la réparition des différents points d'eau sur l'EPCI de la Station des Rousses dans le Jura (39).</div>
   <div class="container">
     <img src="https://live.staticflickr.com/454/32000466395_50f76cdae9_b.jpg" alt="Nature" style="width:100%;">
     <div class="text-block">
@@ -15,6 +16,7 @@
     </div>
   </div>
   <div class="content">
+    <p class="subtitle">Introduction</p>
     <p>Depuis quelques temps maintenant, je voulais faire un projet perso sur l'une de mes passions, la géomatique. 
       Travaillant récemment avec un algorythme servant à créer des Polygones de Voronoï, cela m'a donné une idée, 
       faire une carte de proximité à l'aide de ces derniers, tout en se servant d'un Path Finding.</p>
@@ -37,6 +39,7 @@
     <p class="image-content">
       <img src="assets/cartes/carte_localisation.png" alt="Carte Localisation" class="image" (click)="openDialogImage($event)">
     </p>
+    <p class="subtitle">Les données</p>
     <p>Comme vous avez pu le voir, sur la carte, l'EPCI ne comporte que quatre villes (Ce qui est relativement rare en France (En 2024, 
       cela concernait 7 avec 4 villes ou moins, donc 2 avec seulement 3 communes) et se concentre surtout autour son siège, la ville des Rousses 
       (Qui regroupe un peu plus de la moitié des habitants, avec 3683 habitants), connue pour être une station de sport d'Hiver. Etant dans le Jura, 
@@ -46,9 +49,13 @@
       Ce qui faisait en tout 4 points d'eau et  2308 éléments pour les routes. Du fait que pas mal, de routes n'avait pas de valeurs "highspeed" 
       (Et que cela m'intéressait particulièrement, du fait que le futur Path Finding sera pondéré selon cette valeur), 
       j'ai du faire des modifications dans les données téléchargées pour qu'elles aient une valeur. Voici au final ce que cela donne :</p>
-    <app-chart></app-chart>
+    <app-chart *ngIf="dataLoaded"></app-chart>
+    <div *ngIf="data">
+      <app-table [data]="data"></app-table>
+    </div>
+    <div style="width: 100%;">Si vous voulez voir la concentration des noeuds c'est par <b (click)="openDialogMapForHeatMap()" style="cursor: pointer;">ici</b></div>
     <p>Et avec deux cartes, c'est encore mieux :</p>
-      <app-carousel [images]='images_carousel1'></app-carousel>
+    <app-carousel [images]='images_carousel1'></app-carousel>
     <p>
       D'abrod la première chose que l'on peut voir cette carte, c'est qu'il y a deux points d'eau sur la même commune, celle de Bois d'Amont, cela est un cas plutôt intéressant je trouve, puisque cela va rajouter un peu de concurrence.
     </p>
@@ -60,6 +67,7 @@
       <li>Hors des villes, cela est plutôt l'inverse avec beaucoup de routes à 30km/h (D'ailleurs elles représentes 72% du réseau routier) </li>
       <li>Plusieurs axes parallèles (D25 / N5 - D29E2 / D415) pouvant faire jouer la concurrence</li>
     </ul>
+    <p class="subtitle">La géométrie</p>
     <p>Une fois que l’on a toutes ces données, il faut les formater afin qu’elle puisse être utilisées 
       pour pouvoir utiliser un algorithme de path-finding, du fait qu’en les parcourant, je me suis aperçu d’un petit problème. Et avec des schémas, c’est plus sympathique donc voici :</p>
     <p class="image-content">
@@ -114,6 +122,7 @@
     </ul>
     <p>Une fois que tous ces pré-traitements ont été réalisés, on peut s'attaquer maintenant au coeur du sujet, 
       le Path-Finding et la construction de nos zones d'influence.</p>
+    <p class="subtitle">Path-Finding et Voronoï</p>
     <p>Dans un premier temps, du fait que notre algo de path-finding va se servir à la fois de la maxspeed de nos routes et de la longueur de ces dernières. 
       Il faut calculer une valeur de temps de trajet pour chacune de nos routes, à l'aide de cette super formule :</p> 
     <p style="height: 5px"></p>
@@ -142,7 +151,9 @@
       <li>Le point numéro 4 a su le mieux se développer, du fait qu'il n'y a aucun autre point d'eau au Sud, sur la commune de Lamoura, néanmoins, il a eu d'avantage de concurrence avec le 1, particulièrement au Sud et un peu moins au Nord.</li>
       <li>Enfin le point numéro 1 a su plutôt bien tirer des avantages de sa centralité.</li>
     </ul>
+    <p class="subtitle">Quelques cartes en plus :</p>
     <p>Et voici quelques cartes, pour encore mieux décrire la situation à la fin de cette étude :</p>
+    <p #element4 id ="4"></p>
     <app-carousel [images]='images_carousel2'></app-carousel>
     <p>Ces différentes cartes peuvent bien entendu, nous éclairer encore un peu plus sur la situation.</p>
     <ul>
@@ -160,7 +171,36 @@
         Enfin la dernière carte, elle sert à montrer la différence entre un algo de path finding, basé sur une variable de temps (comme vu plus haut) et un autre basé uniquement sur la longueur des routes, donc quel que soit la vitesse à laquelle on se déplace dessus, tant qu'elle est homogène entre toutes les routes. La première chose que l'on peut s'apercevoir ...
         c'est qu'il n'y a pas une grande différence ... mise à part pour le point 1, qui a su mieux tirer son épingle du jeu, à l'aide de sa place centrale dans l'EPCI et sa proximité avec des routes avec une relativement élevée.
       </li>
-
+    </ul>
+    <p class="subtitle">Ouverture / Critique</p>
+    <p>Voici quelques critiques / ouvertures qui permettent d'aller un peu plus loin dans cette étude : </p>
+    <ul>
+      <li><b>Jointure entre lignes</b> : Créer des liens entre tous les éléments se croisant, sans vérifier. Cela peut fausser les relations, par exemple : un pont piéton passant par dessus une autoroute</li>
+      <li><b>Calcul de la vitesse maximum sur les routes</b> : Vu que cela a été fait, en se basant essentiellement sur des vitesses théoriques (Ex : Pour les chemins) et/ou sur des panneaux de limitation sur Google Street View, 
+      cette valeur a quand même une certaine forte probabilité d'être fausse. Le mieux aurait été de se baser sur des valeurs officielles</li>
+      <li><b>Relation Point / Route Cas numéro 4</b> : Je n'ai pas traité un cas (Lorsque j'ai fait le lien entre mes différentes routes), c'en est un qui se rapproche relativement du cas numéro 3, ce sont les points relativements proches, 
+      mais pas directement ou à moins d'un mètre d'une route déjà existance. Je ne l'ai pas fait, puisque c'était beaucoup plus difficile à faire que ce que j'ai déjà fait et nécessité une vérification pour chaque point, au vu de la problématique.</li>
+      <li><b>Les relations extérieures</b> : Je n'ai pas vraiement pris en compte, les relations de l'EPCI avec son extérieur (par exemple, routes faisant sortant de mon EPCI et y rentrant après / Influence d'autres points d'eaux proches)</li>
+      <li><b>Le relief</b> : Du fait qu'on est en plein d'un massif montagneux, le Jura, cela aurait pu être intéressant de prendre en compte le dénivelé de la route, du fait que cela jouerait un peu sur les temps. Idem pour les virages ...</li>
+      <li><b>Les éléments liés aux routes</b> : Un autre facteur pour impacter sur le temps, sont les éléments qui sont liés aux routes (Ex : Feu tricolore, passage piéton).</li>
+      <li><b>Choix de l’EPCI</b> : Prendre une autre EPCI, avec un réseau routier plus complet (Moins en étoile / Plusieurs pôles / Avec d’avantages d’axes principaux).</li>
+      <li><b>A compléter</b> :  Prendre des données de population (Ex : Carroyage) pour savoir quel est le point d'eau avec le plus d' "attractivité", j'ai essayé de me baser sur des données Open Street Map, mais je n'ai pas trouvé cela vraiment concluant.</li>
+    </ul>
+    <p class="subtitle">Les technos utilisées</p>
+    <p><b>Python (Les principales) : </b></p>
+    <ul>
+      <li>OSMNX : Téléchargement des données d'OSM</li>
+      <li>GeoPandas : Lecture de certaines données géographiques</li>
+      <li>OSGEO : Lecture des données qui n'ont pas été lues à l'aide de GeoPandas</li>
+      <li>NetworkX : Path Finding</li>
+      <li>Shapely : Construction des Voronoï</li>
+    </ul>
+    <p><b>Angular / TypeScript : </b></p>
+    <ul>
+      <li>Materials : Côté esthétique</li>
+      <li>ApexCharts : Pour le graph</li>
+      <li>svgdotjs : Pour la construction de certaines des légendes</li>
+      <li>Openlayers : Pour la carto</li>
     </ul>
   </div>  
   

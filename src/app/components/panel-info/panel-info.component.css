@@ -28,3 +28,10 @@
   .mat-mdc-select{
       width: 400px;
   }
+
+  .legend-gradient {
+    width: 120px;
+    height: 10px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5),rgba(87, 16, 110, 0.5),rgba(188, 55, 84, 0.5),rgba(249, 142, 9, 0.5),rgba(252, 255, 164,0.5));
+  }
+  

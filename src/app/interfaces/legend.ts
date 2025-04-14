@@ -9,5 +9,6 @@ export interface LegendInterface{
     widthSVG: number,
     imageUrl: string,
     size: string,
-    bold: boolean
+    bold: boolean,
+    heatmap: boolean
 }

@@ -28,7 +28,6 @@ export class DialogImageComponent implements OnInit {
         }
         let newString = newArray.join(" ");
         this.alt = newString;
-        console.log(this.alt);
   
        }, 100)
      }

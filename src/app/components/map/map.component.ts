@@ -51,10 +51,8 @@ export class MapComponent {
     MyMap.addLayer(OSMBasemap);
 
     let data = await this.LayerService.readForStyle(info);
-    console.log(data);
 
     data.forEach(value =>{
-      console.log(value);
       MyMap.addLayer(value);
     })
 

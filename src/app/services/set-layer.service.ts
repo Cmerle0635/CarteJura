@@ -5,13 +5,15 @@ import Fill from 'ol/style/Fill.js';
 import Text from 'ol/style/Text.js';
 import {Vector as VectorSource} from 'ol/source';
 import VectorLayer from 'ol/layer/Vector';
+import Heatmap from 'ol/layer/Heatmap';
 import GeoJSON from 'ol/format/GeoJSON';
 import { firstValueFrom } from 'rxjs';
 import Style from 'ol/style/Style.js';
 import Icon from 'ol/style/Icon';
 import { InfoLayer } from '../interfaces/info-layer';
 import Map from 'ol/Map';
-import { LegendInterface } from '../interfaces/legend';
+import { SetLegendService } from './set-legend.service';
+import { SafeAssetService } from './safe-asset.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,27 +24,20 @@ export class SetLayerService {
   private map!: Map;
   private jsonString!: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private LegendService: SetLegendService, private AssetService: SafeAssetService) { }
 
   public async setLayerJSON(): Promise<void>{
-    let data = '';
-    data = await firstValueFrom(this.http.get<string>(this.jsonUrl))
-    .then((value) => {
-      return value
-    })
-    this.jsonString = data;
+    const observable = this.AssetService.loadJSON<string>(this.jsonUrl);
+    const data = await firstValueFrom(observable);
+    if (data){
+      this.jsonString = data;
+      this.LegendService.setLayerJSON(data);
+    }
   }
 
   public setMap(InMap: Map){
     this.map = InMap;
   }
-
-  public getLegend(index: string): LegendInterface[]{
-    let NomIdLayerListe = this.parseJSONForLegend(this.jsonString, index);
-
-    return NomIdLayerListe;
-
-  };
 
   public changeLayers(index: string){
 
@@ -51,7 +46,6 @@ export class SetLayerService {
     let actualLayers = this.map.getAllLayers();
     actualLayers.forEach(function(Layer){
       if(!Layer.getClassName().includes('ol-layer')){
-        console.log(Layer);
         olMap.removeLayer(Layer);
       };
     })
@@ -106,8 +100,8 @@ export class SetLayerService {
           let ValueBreak = false;
           for (let key of newKeyStroke){
             if (!ValueBreak){
-              if (key < intField){
-                indexValue = newKeyStroke.indexOf(key) - 1;
+              if (intField <= key){
+                indexValue = newKeyStroke.indexOf(key);
                 ValueBreak = true;
               }
             }
@@ -117,7 +111,7 @@ export class SetLayerService {
             indexValue = newKeyStroke.length - 1;
           }
           let style = new Style({
-            stroke: new Stroke(JSONLayer.stroke[indexValue])
+            stroke: new Stroke(JSONLayer.stroke[KeyStroke[indexValue]])
           })
           return style;
         }
@@ -168,6 +162,25 @@ export class SetLayerService {
     };
 
     return vectorLayer;
+  }
+
+  private CreateAndStyleHeatMap(JSONLayer: any): Heatmap{
+
+    const vectorSource = new VectorSource({
+      format: new GeoJSON,
+      url: JSONLayer.url,
+    });
+
+    const heatmapLayer = new Heatmap({
+      source: vectorSource,
+      blur: 10,
+      radius: 2,
+      className: JSONLayer.nom,
+      gradient: ['rgba(0, 0, 0, 0.5)','rgba(87, 16, 110, 0.5)','rgba(188, 55, 84, 0.5)','rgba(249, 142, 9, 0.5)','rgba(252, 255, 164,0.5)']
+    });
+
+    return heatmapLayer;
+
   }
 
   private CreateAndStylePolygon(JSONLayer: any): VectorLayer{
@@ -227,8 +240,8 @@ export class SetLayerService {
           let ValueBreak = false;
           for (let key of newKeyStroke){
             if (!ValueBreak){
-              if (key < intField){
-                indexValue = newKeyStroke.indexOf(key) - 1;
+              if (intField <= key){
+                indexValue = newKeyStroke.indexOf(key);
                 ValueBreak = true;
               }
             }
@@ -239,8 +252,8 @@ export class SetLayerService {
           }
 
           let style = new Style({
-            stroke: new Stroke(JSONLayer.stroke[indexValue]),
-            fill: new Fill(JSONLayer.fill[indexValue]),
+            stroke: new Stroke(JSONLayer.stroke[KeyStroke[indexValue]]),
+            fill: new Fill(JSONLayer.fill[KeyStroke[indexValue]]),
           });
           return style;
         }
@@ -277,204 +290,6 @@ export class SetLayerService {
     return vectorLayer
   }
 
-  private CreateLegendPolygon(JSONData: any, compteur: number): LegendInterface[]{
-
-    let LegendForPolygon: LegendInterface[] = [];
-
-    compteur += 1;
-
-    let Keys = Object.keys(JSONData);
-    let TextData = '';
-    let lineDashData = '';
-
-    if (Keys.includes("field")){
-
-      for (let FieldValue of Object.keys(JSONData.stroke)){
-
-        compteur += 1;
-
-        let newLine : LegendInterface = {
-          id: compteur,
-          text: `${JSONData.nom} ${FieldValue}`,
-          hasSVG: true,
-          typeSVG: JSONData.type,
-          fillSVG: JSONData.fill[FieldValue].color,
-          strokeSVG: JSONData.stroke[FieldValue].color,
-          linedashSVG: '',
-          widthSVG: JSONData.stroke[FieldValue].width,
-          imageUrl: '',
-          size: '12px',
-          bold: false    
-        }
-
-        LegendForPolygon.push(newLine);
-
-      }
-
-    } else {
-      if (Keys.includes("text")){
-        TextData = JSONData.text.text.join(" - ");
-      }
-  
-      if (Object.keys(JSONData.stroke).includes("lineDash")){
-        lineDashData = JSONData.stroke.lineDash.join(',');
-      }
-  
-      let newLine : LegendInterface = {
-        id: compteur,
-        text: TextData,
-        hasSVG: true,
-        typeSVG: JSONData.type,
-        fillSVG: '',
-        strokeSVG: JSONData.stroke.color,
-        linedashSVG: lineDashData,
-        widthSVG: JSONData.stroke.width,
-        imageUrl: '',
-        size: '12px',
-        bold: false
-      }
-  
-      LegendForPolygon.push(newLine);
-    }
-
-    return LegendForPolygon;
-
-    }
-
-  private CreateLegendLines(JSONData: any, compteur: number): LegendInterface[]{
-
-    let LegendForLines: LegendInterface[] = [];
-
-    let Keys = Object.keys(JSONData);
-
-    if (Keys.includes("field")){
-
-      for (let FieldValue of Object.keys(JSONData.stroke)){
-
-        compteur += 1;
-
-        let newLine : LegendInterface = {
-          id: compteur,
-          text: FieldValue,
-          hasSVG: true,
-          typeSVG: JSONData.type,
-          fillSVG: '',
-          strokeSVG: JSONData.stroke[FieldValue].color,
-          linedashSVG: '',
-          widthSVG: JSONData.stroke[FieldValue].width,
-          imageUrl: '',
-          size: '12px',
-          bold: false    
-        }
-
-        LegendForLines.push(newLine);
-
-      }
-
-    }
-    return LegendForLines;
-  }
-
-  private CreateLegendPoints(JSONData: any, compteur: number): LegendInterface[]{
-
-    let LegendForPoint: LegendInterface[] = [];
-
-    let Keys = Object.keys(JSONData);
-
-    let compteurItem = 0
-
-    if (Keys.includes("icon_field")){
-
-      for (let IconValue of JSONData.icon){
-
-        compteur += 1;
-
-        compteurItem += 1;
-
-        let newLine : LegendInterface = {
-          id: compteur,
-          text: `${JSONData.nom} ${compteurItem}`,
-          hasSVG: false,
-          typeSVG: '',
-          fillSVG: '',
-          strokeSVG: '',
-          linedashSVG: '',
-          widthSVG: 0,
-          imageUrl: IconValue,
-          size: '12px',
-          bold: false    
-        }
-
-        LegendForPoint.push(newLine);
-
-      }
-
-    }
-    return LegendForPoint;
-  }
-
-  public parseJSONForLegend(Data: string, index: string): LegendInterface[]{
-
-    let compteur = 1;
-    let FinaleLegend: LegendInterface[] = [];
-
-    if (Data){
-      const nJSON = JSON.parse(JSON.stringify(Data));
-      console.log("Je LOG !!!")
-      if (Object.keys(nJSON).includes(index)){
-
-        let JSONIndex = nJSON[index];
-        let JSONKeys = Object.keys(JSONIndex);
-
-        for (let elem of JSONKeys){
-          if (elem != "nom"){
-
-            let JSONData = JSONIndex[Number(elem)];
-
-            let FirstLine : LegendInterface = {
-              id: compteur,
-              text: JSONData.nom,
-              hasSVG: false,
-              typeSVG: '',
-              fillSVG: '',
-              strokeSVG: '',
-              linedashSVG: '',
-              widthSVG: 0,
-              imageUrl: '',
-              size: '14px',
-              bold: true
-            }
-
-            FinaleLegend.push(FirstLine);
-
-            if (JSONData.type =="Polygon"){
-
-              let JSONLegend = this.CreateLegendPolygon(JSONData, compteur);
-              FinaleLegend = FinaleLegend.concat(JSONLegend);
-              compteur = FinaleLegend.length + 1;
-
-            } else if (JSONData.type == "Points"){
-
-              let JSONLegend = this.CreateLegendPoints(JSONData, compteur);
-              FinaleLegend = FinaleLegend.concat(JSONLegend);
-              compteur = FinaleLegend.length + 1;
-
-            } else if (JSONData.type == "Line"){
-
-              let JSONLegend = this.CreateLegendLines(JSONData, compteur);
-              FinaleLegend = FinaleLegend.concat(JSONLegend);
-              compteur = FinaleLegend.length + 1;
-
-            }
-          }
-        }
-      }
-    }
-    console.log(FinaleLegend);
-    return FinaleLegend
-  }
-
-
   private parseJSONLayerListe(Data: string): InfoLayer[]{
     let newInformation: InfoLayer[] = [];
     if (Data){
@@ -490,8 +305,8 @@ export class SetLayerService {
     return newInformation
   }
 
-  private parseJSONLayer(Data:string, index: string): VectorLayer[]{
-    let LayerList: VectorLayer[] = [];
+  private parseJSONLayer(Data:string, index: string): any[]{
+    let LayerList: any[] = [];
     if (Data){
       const nJSON = JSON.parse(JSON.stringify(Data));
       if (Object.keys(nJSON).includes(index)){
@@ -508,6 +323,9 @@ export class SetLayerService {
               LayerList.push(JSONVLayer);
             } else if (JSONData.type == "Line"){
               let JSONVLayer = this.CreateAndStyleLines(JSONData);
+              LayerList.push(JSONVLayer);
+            } else if (JSONData.type == "HeatMap"){
+              let JSONVLayer = this.CreateAndStyleHeatMap(JSONData);
               LayerList.push(JSONVLayer);
             }
           }

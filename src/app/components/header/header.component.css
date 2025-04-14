@@ -1,0 +1,9 @@
+.image{
+    width: 50%;
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 20px;
+}

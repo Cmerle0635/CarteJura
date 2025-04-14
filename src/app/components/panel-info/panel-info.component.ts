@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterContentInit } from '@angular/core';
 import { SetLayerService } from '../../services/set-layer.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -7,13 +7,14 @@ import { NgFor, NgStyle, NgIf } from '@angular/common';
 import { LegendInterface } from '../../interfaces/legend';
 import { SVG } from '@svgdotjs/svg.js';
 import { cp } from 'fs';
+import { SetLegendService } from '../../services/set-legend.service';
 @Component({
   selector: 'app-panel-info',
   imports: [MatSelectModule, ReactiveFormsModule, NgFor, NgStyle, NgIf],
   templateUrl: './panel-info.component.html',
   styleUrl: './panel-info.component.css'
 })
-export class PanelInfoComponent implements AfterViewInit {
+export class PanelInfoComponent implements AfterContentInit {
 
   @Input() 
   info: number | undefined;
@@ -24,37 +25,39 @@ export class PanelInfoComponent implements AfterViewInit {
 
   FieldForFilter: InfoLayer[] = [];
 
-  constructor(private LayerService: SetLayerService){};
+  constructor(private LayerService: SetLayerService, private LegendService: SetLegendService){};
 
-  ngAfterViewInit(){
+  ngAfterContentInit(){
+    const self = this;
     let TrueIndex = (this.info?? 1);
     TrueIndex -= 1;
     let data = this.LayerService.getLayerNames();
     this.selected.setValue(TrueIndex.toString());
-    this.FieldForFilter = data;
-    this.data = this.LayerService.getLegend(TrueIndex.toString());
-    this.setLegend();
+    this.FieldForFilter = data;  
+    setTimeout(function(){
+      self.data = self.LegendService.getLegend(TrueIndex.toString());
+      self.setLegend();
+    }, 500);
   }
 
   getLayerSelected(evt: any){
-    console.log(evt);
+    const self = this;
     this.LayerService.changeLayers(evt);
-    this.data = this.LayerService.getLegend(evt);
-    this.setLegend();
+    setTimeout(function(){
+      self.data = self.LegendService.getLegend(evt);
+      self.setLegend();
+    }, 500);
   }
 
   setLegend(){
     this.data.forEach((item) => {
-  
       if (item.hasSVG){
-        console.log(item);
         const observer = new MutationObserver(() => {
           const dataContainer = document.getElementById(`svg-container-${item.id}`);
           if (dataContainer) {
             observer.disconnect();
             const svgContainer = document.getElementById(`svg-container-${item.id}`);
             if (svgContainer){
-              console.log(getComputedStyle(svgContainer).display);
               if (item.typeSVG == "Line"){
                 let draw = SVG().addTo(svgContainer).size(35,35)
                 draw.rect(30, 30).move(2, 2).fill('transparent').stroke({color: "black", width: 0.2})
@@ -63,7 +66,6 @@ export class PanelInfoComponent implements AfterViewInit {
               } else if (item.typeSVG == "Polygon"){
                 let draw = SVG().addTo(svgContainer).size(35,35);
                 let rect = draw.rect(30, 30).move(2, 2);
-                console.log(item);
                 if (item.fillSVG){
                   rect.fill(item.fillSVG);
                 } else {

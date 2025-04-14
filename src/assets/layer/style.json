@@ -364,5 +364,104 @@
         }
       }
     }
+  },
+  "6": {
+    "nom": "Comparaison des zones d'infleunce Temps vs Géométrie uniquement",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiTemps.geojson",
+      "nom": "Zone d'influence selon le Temps",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(181,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(212,85,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(34,85,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,125,128,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "rgba(181,0,0,0.3)"
+        },
+        "1":{
+          "color": "rgba(212,85,0,0.3)"
+        },
+        "2":{
+          "color": "rgba(34,85,0,0.3)"
+        },
+        "3":{
+          "color": "rgba(0,125,128,0.3)"
+        }
+      }
+    },
+    "1": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiPoints.geojson",
+      "nom": "Zone d'influence selon la Géométrie des Points",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(255,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(255,255,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(0,255,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,255,255,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "transparent"
+        },
+        "1":{
+          "color": "transparent"
+        },
+        "2":{
+          "color": "transparent"
+        },
+        "3":{
+          "color": "transparent"
+        }
+      }
+    }
+  },
+  "7": {
+    "nom": "Concentraction des noeuds",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/Extent_EPCI.geojson",
+      "nom": "Etendu de l'EPCI",
+      "stroke": {
+        "color": "red",
+        "width": 5
+      },
+      "fill": {
+        "color": "transparent"
+      }
+    },
+    "1": {
+      "type": "HeatMap",
+      "url": "/assets/data/ExportPoint.geojson",
+      "nom": "Concentraction"
+    }
   }
 }

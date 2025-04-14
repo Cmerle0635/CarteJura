@@ -8,11 +8,21 @@
         <div *ngIf="item.hasSVG; else showImage" class="svg-box" [id]="'svg-container-' + item.id"></div>
       
         <ng-template #showImage>
-          <img *ngIf="item.imageUrl" [src]="item.imageUrl" alt="Image" class="image-box">
+          <img *ngIf="item.imageUrl; else showHeatMap" [src]="item.imageUrl" alt="Image" class="image-box">
+        </ng-template>
+
+        <ng-template #showHeatMap>
+            <div *ngIf="item.heatmap" class="legendHeatMap">
+                <div class="legend-gradient"></div>
+                <div><strong>Densité de points</strong></div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span>Faible</span><span>Forte</span>
+                </div>
+            </div>
         </ng-template>
       
         <p [ngStyle]="{ 'font-weight': item.bold ? 'bold' : 'normal',  'font-size':item.size}">
         {{ item.text }}
         </p>
-    </div>      
+    </div> 
 </div>

@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,8 +12,9 @@ import { PanelInfoComponent } from './components/panel-info/panel-info.component
 import { SetLayerService } from './services/set-layer.service';
 import { DialogImageComponent } from './components/dialog-image/dialog-image.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
-import { ChartComponent } from './components/chart/chart.component';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { ChartComponent } from 'ng-apexcharts';
+import { HeaderComponent } from './components/header/header.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,10 @@ import { NgApexchartsModule } from "ng-apexcharts";
     PanelInfoComponent,
     MapComponent,
     CarouselComponent,
-    ChartComponent],
+    ChartComponent,
+    HeaderComponent,
+    TableComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -31,11 +35,10 @@ import { NgApexchartsModule } from "ng-apexcharts";
     MatDialogModule,
     MatSelectModule,
     ReactiveFormsModule,
-    NgApexchartsModule,
   ],
   providers: [SetLayerService],
   bootstrap: [
     AppComponent
-  ],
+  ]
 })
 export class AppModule {}
