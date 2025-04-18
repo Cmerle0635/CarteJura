@@ -22,7 +22,7 @@ jobs:
         node-version: '22'
 
     - name: 📦 Install dependencies
-      run: npm ci
+      run: npm install
 
     - name: 🔨 Build Angular SSR
       run: npm run build
