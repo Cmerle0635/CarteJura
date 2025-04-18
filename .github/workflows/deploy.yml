@@ -1,34 +1,38 @@
-name: Build & Deploy Angular SSR
+name: Build & Push Dist
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 📥 Checkout
+    - name: Checkout
       uses: actions/checkout@v3
 
-    - name: 🟢 Node.js setup
+    - name: Setup Node
       uses: actions/setup-node@v3
       with:
         node-version: '22'
 
-    - name: 📦 Install dependencies
-      run: npm install
+    - name: Install dependencies
+      run: npm ci
 
-    - name: 🔨 Build SSR
+    - name: Build SSR
       run: npm run build
 
-    - name: 📡 Deploy to server via SCP
-      uses: appleboy/scp-action@v0.1.4
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        password: ${{ secrets.SSH_PW }}
-        source: "dist/GeoByCM/"
-        target: "/home/xuze7952/app"
+    - name: Push dist/ to branch "build"
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        git switch --orphan build
+        git rm -rf .
+        cp -r dist/GeoByCM/* .
+        touch .nojekyll  # si tu veux GitHub Pages plus tard
+
+        git add .
+        git commit -m "Deploy build $(date +'%Y-%m-%d %H:%M')"
+        git push -f origin build
