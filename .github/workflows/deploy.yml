@@ -1,37 +1,44 @@
-name: Build & Push Dist
+name: Build & Push Angular SSR to `build` branch
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
+    - name: 🧩 Checkout avec accès push
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Setup Node
+    - name: 🟢 Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '22'
 
-    - name: Install dependencies
-      run: npm install
+    - name: 📦 Install dependencies
+      run: npm ci
 
-    - name: Build SSR
+    - name: 🔨 Build Angular SSR
       run: npm run build
 
-    - name: Push dist/ to branch "build"
+    - name: 🚀 Push dist/ to branch "build"
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
         git switch --orphan build
         cp -r dist/GeoByCM/* .
-        touch .nojekyll  # si tu veux GitHub Pages plus tard
+        touch .nojekyll
 
         git add .
         git commit -m "Deploy build $(date +'%Y-%m-%d %H:%M')"
+
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git branch -M build
         git push -f origin build
