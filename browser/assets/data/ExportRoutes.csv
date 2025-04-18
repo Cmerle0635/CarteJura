@@ -1,0 +1,16 @@
+etiquettes de lignes;2;5;30;40;50;70;80;Total general;Modifications apportees
+footway;;133;;;;;;133;Passage a 5 (Vitesse moyenne de quelqu'un a pied)
+living_street;;;;;7;;;7;Passage a 50 pour toutes valeurs null
+path;;;446;;;;;446;Passe a 30 pour toutes valeurs null
+pedestrian;;2;;;;;;2;Passage a 5 (Vitesse moyenne de quelqu'un a pied)
+primary;;;8;;11;10;19;48;Modification a la main pour les valeurs null (Essentielle selon Google Street Map)
+residential;;;26;1;201;;1;229;Passage a 50 pour toutes valeurs null
+secondary;;;2;;44;14;22;82;Modification a la main pour les valeurs null (Essentielle selon Google Street Map)
+secondary_link;;;;;;1;;1;Aucune modification apportee
+service;;;503;;;;;503;Passe a 30 pour toutes valeurs null
+steps;24;;;;;;;24;Passage a 2 (Vitesse moyenne d'une personne dans un escalier)
+tertiary;;;5;;44;1;22;72;Modification a la main pour les valeurs null (Essentielle selon Google Street Map)
+tertiary_link;;;;;;1;;1;Aucune modification apportee
+track;;;484;;1;;3;488;Passe a 30 pour toutes valeurs null
+unclassified;;;191;;38;;17;246;Pour null : Ville 50 Hors 30
+Total general;24;135;1665;1;346;27;84;2282;

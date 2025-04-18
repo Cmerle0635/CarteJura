@@ -1,0 +1,16 @@
+type;2;5;30;40;50;70;80;Total general;Modification apportees;description
+footway;-;271 (11,28 km);-;-;-;-;-;271 (11,28 km);Passage a 5 (Vitesse moyenne de quelqu'un a pied);For designated footpaths; i.e., mainly/exclusively for pedestrians. This includes walking tracks and gravel paths. If bicycles are allowed as well, you can indicate this.
+living_street;-;-;-;-;7 (0,23 km);-;-;7 (0,23 km);Passage a 50 pour toutes valeurs null;For living streets, which are residential streets where pedestrians have legal priority over cars, speeds are kept very low.	
+path;-;-;968 (167,23 km);-;-;-;-;968 (167,23 km);Passe a 30 pour toutes valeurs null;A non-specific path.
+pedestrian;-;2 (0,03 km);-;-;-;-;-;2 (0,03 km);Passage a 5 (Vitesse moyenne de quelqu'un a pied);The way between two crossings, safespot for pedestrians.
+primary;-;-;12 (0,12 km);-;54 (1,71 km);27 (8,04 km);50 (13,68 km);143 (23,55 km);Modification a la main pour les valeurs null (Essentiellement selon Google Street Map);The next most important roads in a country's system. (Often link larger towns.)
+residential;-;-;65 (4,05 km);2 (0,18 km);546 (42,60 km);-;4 (0,63 km);617 (47,47 km);Passage a 50 pour toutes valeurs null;Roads which serve as an access to housing, without function of connecting settlements. Often lined with housing.	
+secondary;-;-;2 (0,05 km);-;142 (10,19 km);63 (4,07 km);358 (21,23 km);565 (35,55 km);Modification a la main pour les valeurs null (Essentiellement selon Google Street Map);The next most important roads in a country's system. (Often link towns.)
+secondary_link;-;-;-;-;-;1 (0,04 km);-;1 (0,04 km);Aucune modification apportee;The link roads (sliproads/ramps) leading to/from a secondary road from/to a secondary road or lower class highway.	
+service;-;-;1335 (47,01 km);-;-;-;-;1335 (47,01 km);Passe a 30 pour toutes valeurs null;For access roads to, or within an industrial estate, camp site, business park, car park, alleys, etc.
+steps;24 (0,29 km);-;-;-;-;-;-;24 (0,29 km);Passage a 2 (Vitesse moyenne d'une personne dans un escalier);For flights of steps (stairs) on footways.
+tertiary;-;-;16 (0,58 km);-;257 (21,27 km);2 (0,18 km);62 (15,95 km);337 (37,98 km);Modification a la main pour les valeurs null (Essentiellement selon Google Street Map);The next most important roads in a country's system. (Often link smaller towns and villages).
+tertiary_link;-;-;-;-;-;1 (0,03 km);-;1 (0,03 km);Aucune modification apportee;The link roads (sliproads/ramps) leading to/from a tertiary road from/to a tertiary road or lower class highway.;
+track;-;-;961 (170,96 km);-;1 (0,29 km);-;3 (0,41 km);965 (171,67 km);Passe a 30 pour toutes valeurs null;Roads for mostly agricultural or forestry uses.
+unclassified;-;-;936 (71,04 km);-;134 (11,24 km);-;57 (14,81 km);1127 (97,09 km);Pour null : Ville 50 Hors 30;The least important through roads in a country's system – i.e. minor roads of a lower classification than tertiary, but which serve a purpose other than access to properties. (Often link villages and hamlets.)
+Total general;24 (0,29 km);273 (11,31 km);4295 (461,04 km);2 (0,18 km);1141 (87,53 km);94 (12,36 km);534 (66,73 km);6363 (639,43 km);
