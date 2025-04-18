@@ -29,7 +29,6 @@ jobs:
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        port: 21
+        password: ${{ secrets.SSH_PW }}
         source: "dist/GeoByCM/"
         target: "/home/xuze7952/app"
