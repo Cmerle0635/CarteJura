@@ -12,6 +12,7 @@ import { isPlatformBrowser, NgIf } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { TableComponent } from './components/table/table.component';
 import { firstValueFrom } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CarouselComponent, ChartComponent, NgIf, HeaderComponent, TableComponent],
@@ -107,18 +108,15 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-
-      this.LayerService.setLayerJSON();
-
+  
+      // S'assurer que setLayerJSON() retourne une Promise (sinon ajoute async/await dans le service)
+      await this.LayerService.setLayerJSON();
+  
       this.RoutesInfo = await this.GIService.getRouteData();
-
-      this.GIService.ReadCSV().subscribe({
-        next: (res) => {
-          this.data = res;
-          this.dataLoaded = true;
-        },
-        error: (err) => console.error('Erreur chargement CSV :', err)
-      });
+  
+      this.data = await firstValueFrom(this.GIService.ReadCSV());
+  
+      this.dataLoaded = true;
     }
   }
 
