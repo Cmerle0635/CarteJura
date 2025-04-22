@@ -50,9 +50,15 @@ export class GetInfoService {
   }
 
   private parseCsv(csv: string): any[] {
+    console.log("Je suis dans la fonction !");
+    console.log("Lignes :");
     const lines = csv.trim().split('\r\n');
+    console.log(lines);
+    console.log("Headers :");
     const headers = lines[0].split(';');
+    console.log(headers);
     return lines.slice(1).map(line => {
+      console.log("Ligne :");
       console.log(line);
       const values = line.split(';');
       const obj: any = {};
