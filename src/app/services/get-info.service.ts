@@ -34,6 +34,8 @@ export class GetInfoService {
 
 
   public ReadCSV(): Observable<any[]> {
+    this.csvUrl = `${window.location.origin}/assets/data/StatRouteTableau.csv`;
+    console.log(this.csvUrl);
     return this.AssetService.loadText(this.csvUrl).pipe(
       map(data => {
         if (data) {
