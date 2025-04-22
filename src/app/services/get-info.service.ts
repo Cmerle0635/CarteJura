@@ -21,10 +21,28 @@ export class GetInfoService {
   HeaderRoute: string[];
   DataRoute: string[];
 
-  ReadCSV(): Observable<any[]> {
+  public async getRouteData(): Promise<RoutesInfoInterface>{
+    let data = '';
+    data = await firstValueFrom(this.http.get<string>(this.jsonUrl))
+    .then((value) => {
+      return value
+    })
+    let returnData = this.getFullInformationRoute(data);
+    this.RouteData = returnData;
+    return returnData;
+}
+
+
+  public ReadCSV(): Observable<any[]> {
+
+    this.http.get(this.csvUrl, { responseType: 'text' }).subscribe(data => {
+      console.log("Données CSV récupérées : via http.get", data);
+    });
+
     return this.AssetService.loadText(this.csvUrl).pipe(
       map(data => {
         if (data) {
+          console.log("Données récupérées", data);
           return this.parseCsv(data);
         } else {
           return [];
@@ -49,17 +67,6 @@ export class GetInfoService {
 
   public returnData(): RoutesInfoInterface{
     return this.RouteData;
-  }
-
-  public async getRouteData(): Promise<RoutesInfoInterface>{
-      let data = '';
-      data = await firstValueFrom(this.http.get<string>(this.jsonUrl))
-      .then((value) => {
-        return value
-      })
-      let returnData = this.getFullInformationRoute(data);
-      this.RouteData = returnData;
-      return returnData;
   }
 
   public getFullInformationRoute(data: string): RoutesInfoInterface{

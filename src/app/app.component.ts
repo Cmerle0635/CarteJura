@@ -61,7 +61,6 @@ export class AppComponent implements OnInit {
       let Visible = this.isElementVisible(elem);
       if (Visible) {
         this.MaxID = elem.getAttribute("id");
-        console.log(this.MaxID);
       }
     });
   }
@@ -106,12 +105,10 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     if (typeof window !== 'undefined') {
     window.addEventListener('scroll', () => {
-      console.log("Scroll détecté avec addEventListener !");
       this.onScrollOrResize();
     });
 
     window.addEventListener('resize', () => {
-      console.log("Resize détecté !");
       this.onScrollOrResize();
     });
   }
