@@ -52,7 +52,7 @@ export class GetInfoService {
   private parseCsv(csv: string): any[] {
     console.log("Je suis dans la fonction !");
     console.log("Lignes :");
-    const lines = csv.trim().split('\r\n');
+    const lines = csv.trim().split(/\r?\n/);
     console.log(lines);
     console.log("Headers :");
     const headers = lines[0].split(';');
