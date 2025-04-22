@@ -49,10 +49,13 @@
       Ce qui faisait en tout 4 points d'eau et  2308 éléments pour les routes. Du fait que pas mal, de routes n'avait pas de valeurs "highspeed" 
       (Et que cela m'intéressait particulièrement, du fait que le futur Path Finding sera pondéré selon cette valeur), 
       j'ai du faire des modifications dans les données téléchargées pour qu'elles aient une valeur. Voici au final ce que cela donne :</p>
+    <p></p>
     <app-chart *ngIf="dataLoaded"></app-chart>
+    <p></p>
     <div *ngIf="data">
       <app-table [data]="data"></app-table>
     </div>
+    <p></p>
     <div style="width: 100%;">Si vous voulez voir la concentration des noeuds c'est par <b (click)="openDialogMapForHeatMap()" style="cursor: pointer;">ici</b></div>
     <p>Et avec deux cartes, c'est encore mieux :</p>
     <app-carousel [images]='images_carousel1'></app-carousel>
