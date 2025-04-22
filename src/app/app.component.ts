@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMapComponent } from './components/dialog-map/dialog-map.component';
@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
     private dialogImage: MatDialog, 
     private LayerService: SetLayerService, 
     private GIService: GetInfoService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cdRef: ChangeDetectorRef
   ){}
 
   MaxID = 1;
@@ -38,9 +39,6 @@ export class AppComponent implements OnInit {
   @ViewChild('element2') element2!: ElementRef;
   @ViewChild('element3') element3!: ElementRef;
   @ViewChild('element4') element4!: ElementRef;
-
-  @HostListener('window:scroll', ['$event'])
-  @HostListener('window:resize', ['$event'])
 
   dataLoaded: boolean = false;
 
@@ -57,16 +55,18 @@ export class AppComponent implements OnInit {
 
   onScrollOrResize() {
 
-    const self = this;
+    console.log("Scrolling event triggered");
+    console.log("Valeur de dataLoaded :", this.dataLoaded);
 
     let Liste = [this.element1.nativeElement, this.element2.nativeElement, this.element3.nativeElement, this.element4.nativeElement];
-    Liste.forEach(function(elem){
-      let Visible = self.isElementVisible(elem);
-      if (Visible){
-        self.MaxID = elem.getAttribute("id");
-        console.log(self.MaxID);
+    
+    Liste.forEach((elem) => { // Fonction fléchée pour garder "this"
+      let Visible = this.isElementVisible(elem);
+      if (Visible) {
+        this.MaxID = elem.getAttribute("id");
+        console.log(this.MaxID);
       }
-    })
+    });
   }
 
   isElementVisible(element: HTMLElement): boolean {
@@ -107,16 +107,29 @@ export class AppComponent implements OnInit {
   title = 'GeoByCM';
 
   async ngOnInit() {
+    if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', () => {
+      console.log("Scroll détecté avec addEventListener !");
+      this.onScrollOrResize();
+    });
+
+    window.addEventListener('resize', () => {
+      console.log("Resize détecté !");
+      this.onScrollOrResize();
+    });
+  }
     if (isPlatformBrowser(this.platformId)) {
   
       // S'assurer que setLayerJSON() retourne une Promise (sinon ajoute async/await dans le service)
-      await this.LayerService.setLayerJSON();
-  
-      this.RoutesInfo = await this.GIService.getRouteData();
-  
-      this.data = await firstValueFrom(this.GIService.ReadCSV());
-  
-      this.dataLoaded = true;
+      try {
+        await this.LayerService.setLayerJSON();
+        this.RoutesInfo = await this.GIService.getRouteData();
+        this.data = await firstValueFrom(this.GIService.ReadCSV());
+        this.dataLoaded = true;
+        this.cdRef.detectChanges(); // Force l'actualisation du DOM
+      } catch (error) {
+        console.log("Erreur lors du chargement des données :", error);
+      }
     }
   }
 
