@@ -119,6 +119,7 @@ export class AppComponent implements OnInit {
         await this.LayerService.setLayerJSON();
         this.RoutesInfo = await this.GIService.getRouteData();
         this.data = await firstValueFrom(this.GIService.ReadCSV());
+        console.log(this.data);
         this.dataLoaded = true;
         this.cdRef.detectChanges(); // Force l'actualisation du DOM
       } catch (error) {

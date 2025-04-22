@@ -34,15 +34,9 @@ export class GetInfoService {
 
 
   public ReadCSV(): Observable<any[]> {
-
-    this.http.get(this.csvUrl, { responseType: 'text' }).subscribe(data => {
-      console.log("Données CSV récupérées : via http.get", data);
-    });
-
     return this.AssetService.loadText(this.csvUrl).pipe(
       map(data => {
         if (data) {
-          console.log("Données récupérées", data);
           return this.parseCsv(data);
         } else {
           return [];
