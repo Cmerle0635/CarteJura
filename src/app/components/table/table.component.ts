@@ -30,14 +30,12 @@ export class TableComponent implements OnInit{
 
 
   ngOnInit(): void {
-    console.log(this.data);
     let Fields = Object.keys(this.data[0]);
     let newFields: string[] = ["type"];
     if (Fields.includes("type")){
       Fields.forEach(field =>{
         if (!field.includes("type") && !field.includes("description") ){
           newFields.push(field);
-          console.log(field);
         }
       });
     }
