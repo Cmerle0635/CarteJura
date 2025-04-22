@@ -38,7 +38,9 @@ export class GetInfoService {
     console.log(this.csvUrl);
     return this.AssetService.loadText(this.csvUrl).pipe(
       map(data => {
+        console.log(data);
         if (data) {
+          console.log("J'ai bien des données !");
           return this.parseCsv(data);
         } else {
           return [];
@@ -51,6 +53,7 @@ export class GetInfoService {
     const lines = csv.trim().split('\r\n');
     const headers = lines[0].split(';');
     return lines.slice(1).map(line => {
+      console.log(line);
       const values = line.split(';');
       const obj: any = {};
       headers.forEach((header, index) => {
