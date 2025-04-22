@@ -36,6 +36,7 @@ export class TableComponent implements OnInit{
       Fields.forEach(field =>{
         if (!field.includes("type") && !field.includes("description") ){
           newFields.push(field);
+          console.log(field);
         }
       });
     }

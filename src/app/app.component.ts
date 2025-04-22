@@ -54,10 +54,7 @@ export class AppComponent implements OnInit {
   ];
 
   onScrollOrResize() {
-
-    console.log("Scrolling event triggered");
-    console.log("Valeur de dataLoaded :", this.dataLoaded);
-
+    
     let Liste = [this.element1.nativeElement, this.element2.nativeElement, this.element3.nativeElement, this.element4.nativeElement];
     
     Liste.forEach((elem) => { // Fonction fléchée pour garder "this"
