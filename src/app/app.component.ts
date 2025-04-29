@@ -108,6 +108,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   detectDeviceAndApplyClass() {
     if (/Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent)){
+      this.mobile = false;
       let ListeID = ["container", "content", "summary", "title"]
       ListeID.forEach((ID) => {
         let ElemID = document.getElementById(ID);
@@ -126,7 +127,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.detectDeviceAndApplyClass();
-      this.mobile = false;
     }, 100); 
   }
 
