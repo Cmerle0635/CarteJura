@@ -1,21 +1,21 @@
 
 <main class="main">
-  <button id="BtnCarte" mat-raised-button color="primary" (click)="openDialogMap()">
+  <button id="BtnCarte" mat-raised-button color="primary" (click)="openDialogMap()" class="btn_desktop">
     <b>Explorer les cartes</b>
   </button>
   <app-header></app-header>
   <div #element1 id="1"></div>
   <div id="info">Cartographie</div>
-  <div id="Title">La guerre des points d'eau dans le Jura !!!</div>
-  <div id="info">Par Clément MERLE / Le 02-01-2025</div>
-  <div id="Summary">Ce premier article présente une petite étude que j'ai faite sur la réparition des différents points d'eau sur l'EPCI de la Station des Rousses dans le Jura (39).</div>
-  <div class="container">
+  <div id="title" class="desktop">La guerre des points d'eau dans le Jura !!!</div>
+  <div id="info">Par Clément MERLE / Le 27-04-2025</div>
+  <div id="summary" class="desktop">Ce premier article présente une petite étude que j'ai faite sur la réparition des différents points d'eau sur l'EPCI de la Station des Rousses dans le Jura (39).</div>
+  <div id="container" class="desktop">
     <img src="https://live.staticflickr.com/454/32000466395_50f76cdae9_b.jpg" alt="Nature" style="width:100%;">
     <div class="text-block">
       <p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/63127193@N06/32000466395">Creux du Croue - Jura (30.12.16) 46</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/63127193@N06">rouilleralain</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-sa/2.0/?ref=openverse">CC BY-SA 2.0 <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /><img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" style="height: 1em; margin-right: 0.125em; display: inline;" /></a>.</p>
     </div>
   </div>
-  <div class="content">
+  <div id="content" class="desktop">
     <p class="subtitle">Introduction</p>
     <p>Depuis quelques temps maintenant, je voulais faire un projet perso sur l'une de mes passions, la géomatique. 
       Travaillant récemment avec un algorythme servant à créer des Polygones de Voronoï, cela m'a donné une idée, 
@@ -32,7 +32,8 @@
         cela limite son nombre de routes, donc temps de calcul</li>
       <li>Le Jura est un département relativement rural et réputé pour la randonnée, cela rentrait parfaitement dans le sujet sujet et cela permet aussi de mettre en valeur un territoire rural</li>
       <li>Point Bonus : EPCI frontalière avec un autre pays.</li>
-      <li>Point Bonus 2 : A fait partie d’un film récemment passé au cinéma (Un Ours dans le Jura)</li>
+      <li>Point Bonus 2 : A fait partie d’un film récemment passé au cinéma (Un Ours dans le Jura).</li>
+      <li>Point Bonus 3 : Il y a la principauté d'Arbézie en partie sur le territoire.</li>
     </ul>
     <p #element2 id ="2"></p>
     <p>Ci-dessous, une carte de localisation de l'EPCI : </p>
@@ -41,7 +42,7 @@
     </p>
     <p class="subtitle">Les données</p>
     <p>Comme vous avez pu le voir, sur la carte, l'EPCI ne comporte que quatre villes (Ce qui est relativement rare en France (En 2024, 
-      cela concernait 7 avec 4 villes ou moins, donc 2 avec seulement 3 communes) et se concentre surtout autour son siège, la ville des Rousses 
+      cela concernait 7 avec 4 villes ou moins, donc 2 avec seulement 3 communes) et se concentre surtout autour de son siège, la ville des Rousses 
       (Qui regroupe un peu plus de la moitié des habitants, avec 3683 habitants), connue pour être une station de sport d'Hiver. Etant dans le Jura, 
       cette communauté de communes est contrasté par son relief. Son point le plus bas est à 720 mètres (Dans la commune des Rousses) et son plus haut, 
       est quant à lui à 1495m (Commune de Lamoura, avec le Crêt Pela).</p>
@@ -52,7 +53,7 @@
     <p></p>
     <app-chart *ngIf="dataLoaded"></app-chart>
     <p></p>
-    <div *ngIf="data">
+    <div *ngIf="data && mobile">
       <app-table [data]="data"></app-table>
     </div>
     <p></p>
@@ -66,7 +67,7 @@
       Ensuite sur les routes, on peut noter différents points :
     </p>
     <ul>
-      <li>Réseau assez logique entre les villes de l'EPCI, avec voix relativement rapides (> 50 km/h en majorité) et qui s'articule surtout autour de la commune la plus peuplée de la Communauté de Communes</li>
+      <li>Réseau assez logique entre les villes de l'EPCI, avec des voies relativement rapides (> 50 km/h en majorité) et qui s'articulent surtout autour de la commune la plus peuplée de la Communauté de Communes</li>
       <li>Hors des villes, cela est plutôt l'inverse avec beaucoup de routes à 30km/h (D'ailleurs elles représentes 72% du réseau routier) </li>
       <li>Plusieurs axes parallèles (D25 / N5 - D29E2 / D415) pouvant faire jouer la concurrence</li>
     </ul>
@@ -115,7 +116,7 @@
       <li>Le point doit se trouver dans la boîte englobante de la route.</li>
       <li>La distance perpendiculaire du point à la route doit être de mois d’un mètre.</li>
     </ul>
-    <p>Une fois que l’on a fait cela, il suffit de modifier notre route, en créant un nouveau sur cette dernière, afin de la split en deux.</p>
+    <p>Une fois que l’on a fait cela, il suffit de modifier notre route, en créant un nouveau point où il y a le fameux croisement et de split la route en deux.</p>
     <p>Pour information, en termes de nombre de routes, on passe de :</p>
     <ul>
       <li>2276 routes après téléchargement de données de OSM.</li>
@@ -127,7 +128,7 @@
       le Path-Finding et la construction de nos zones d'influence.</p>
     <p class="subtitle">Path-Finding et Voronoï</p>
     <p>Dans un premier temps, du fait que notre algo de path-finding va se servir à la fois de la maxspeed de nos routes et de la longueur de ces dernières. 
-      Il faut calculer une valeur de temps de trajet pour chacune de nos routes, à l'aide de cette super formule :</p> 
+      Il faut calculer une valeur de temps de trajet pour chacune de nos routes, à l'aide de cette superbe formule :</p> 
     <p style="height: 5px"></p>
     <div class="function">
       <p>Temps = ( Distance / ( Vitesse Max / 3.6 ) ) / 60</p>
@@ -139,7 +140,7 @@
       on lance l'algo 4 fois (une fois par point d'eau) et on garde la valeur la plus faible, pour déterminer quel est le point d'eau le plus proche de notre noeud.
     </p>
     <p #element3 id ="3">
-      Une fois que l'on a toutes ces valeurs. A partir de nos différents points, on calcule nos fameux polygones de Voronoï, tout en les limitant leur expansion à la taille de notre EPCI.
+      Une fois que l'on a toutes ces valeurs. A partir de nos différents points, on calcule nos fameux polygones de Voronoï, tout en les limitant leur expansion à la superficie de notre EPCI.
       Quand ces polygones sont créés, on fait une jointure spatiale avec nos points, pour savoir à quel point d'eau, notre polygone appartient et enfin, on merge tous nos polygones suivant leur valeur d'appartenance, 
       afin d'avoir les fameuses zones d'influences de nos points d'eau, ce qui nous donne cette carte : 
     </p>
@@ -168,12 +169,13 @@
       <li>
         La seconde présente le nombre d'occurences minimale (par route) de chaque noeud dans le Path Finding. Plus une valeur est importante, plus elle a donc à servi à étendre l'influence du point d'eau, auquel le noeud est rattaché. 
         Sans surprise, les routes aux alentours du point d'eau numéro 3 ont des valeurs très faibles. Concernant les autres, on peut voir que le point numéro 3, a su plutôt étendre son territoire à l'aide d'un réseau en étoile, ce qui est plutôt logique du fait que la commune des Rousses est à la fois
-        le siège de l'EPCI, mais aussi sa commune la peuplée, donc celle qui est le mieux reliée au réseau routier. Quant au point numéro 4, du fait que c'est le point avec la plus grande d'influence, rien de surprenant à ce que ses routes aient été utilisés le plus grand nombre et l'axe majoritaire est celui qui va vers la commune de Laomura.
+        le siège de l'EPCI, mais aussi sa commune la peuplée, donc celle qui est le mieux reliée au réseau routier. Quant au point numéro 4, du fait que c'est le point avec la plus grande d'influence, rien de surprenant à ce que ses routes aient été utilisés le plus grand nombre de fois et l'axe majoritaire est celui qui va vers la commune de Laomura.
       </li>
       <li>
-        Enfin la dernière carte, elle sert à montrer la différence entre un algo de path finding, basé sur une variable de temps (comme vu plus haut) et un autre basé uniquement sur la longueur des routes, donc quel que soit la vitesse à laquelle on se déplace dessus, tant qu'elle est homogène entre toutes les routes. La première chose que l'on peut s'apercevoir ...
-        c'est qu'il n'y a pas une grande différence ... mise à part pour le point 1, qui a su mieux tirer son épingle du jeu, à l'aide de sa place centrale dans l'EPCI et sa proximité avec des routes avec une relativement élevée.
+        Enfin la troisième carte, elle sert à montrer la différence entre un algo de path finding, basé sur une variable de temps (comme vu plus haut) et un autre basé uniquement sur la longueur des routes, donc quel que soit la vitesse à laquelle on se déplace dessus, tant qu'elle est homogène entre toutes les routes. La première chose que l'on peut s'apercevoir ...
+        c'est qu'il n'y a pas une grande différence ... mise à part pour le point 1, qui a su mieux tirer son épingle du jeu grêce de sa place centrale dans l'EPCI et sa proximité avec des routes avec une valeur relativement élevée.
       </li>
+      <li>Quant à la dernière carte, elle sert à montrer la différence entre un algo pondéré par des valeurs (et avec path finding avant) et un algo de Voronoï se basant uniquement sur la position des points d'eau, et les différentes entre les deux cartes sont flagrantes.</li>
     </ul>
     <p class="subtitle">Ouverture / Critique</p>
     <p>Voici quelques critiques / ouvertures qui permettent d'aller un peu plus loin dans cette étude : </p>

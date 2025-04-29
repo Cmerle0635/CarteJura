@@ -25,9 +25,21 @@ export class DialogMapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dialogRef.afterOpened().subscribe(() => {
-      setTimeout(() => {
-        this.mapComponent.initMap(this.info); // 🔥 Appelle la méthode initMap() de MapComponent
-      }, 0);
+      let Legend = document.getElementById("legend");
+      let Logo = document.getElementById("fermer_logo");
+      if (/Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent)){
+        if(Legend){
+          Legend.className += '_mob';
+        }
+        if(Logo){
+          Logo.className += '_mob';
+        }
+      }
+      this.mapComponent.initMap(this.info)
     });
+  }
+
+  closeDialog(evt: Event){
+    this.dialogRef.close();
   }
 }

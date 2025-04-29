@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnInit, PLATFORM_ID, ViewChild, AfterViewInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMapComponent } from './components/dialog-map/dialog-map.component';
@@ -20,7 +20,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './app.component.css',
   standalone: true
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dialogMap: MatDialog, 
@@ -29,10 +29,12 @@ export class AppComponent implements OnInit {
     private GIService: GetInfoService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdRef: ChangeDetectorRef
-  ){}
+  ){
+  }
 
   MaxID = 1;
   data: any;
+  mobile: boolean = true;
   RoutesInfo: RoutesInfoInterface = {} as RoutesInfoInterface;
 
   @ViewChild('element1') element1!: ElementRef;
@@ -92,17 +94,44 @@ export class AppComponent implements OnInit {
   }
 
   openDialogImage(evt: any) {
-    this.dialogImage.open(DialogImageComponent, {
-      panelClass: 'custom-dialog',
-      maxHeight: '100vh',
-      maxWidth: '100vw',
-      data: { source_image: evt.srcElement.currentSrc}
-    });
+    if (!/Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent)){
+      this.dialogImage.open(DialogImageComponent, {
+        panelClass: 'custom-dialog',
+        maxHeight: '100vh',
+        maxWidth: '100vw',
+        data: { source_image: evt.srcElement.currentSrc}
+      });
+    }
   }
 
   title = 'GeoByCM';
 
+  detectDeviceAndApplyClass() {
+    if (/Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent)){
+      let ListeID = ["container", "content", "summary", "title"]
+      ListeID.forEach((ID) => {
+        let ElemID = document.getElementById(ID);
+        if (ElemID){
+          ElemID.setAttribute("class", "mobile");
+        }
+      })
+      let button = document.getElementById("BtnCarte")
+      if (button){
+        button.setAttribute("class", "btn_mobile");
+        console.log(button);
+      }
+    }
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.detectDeviceAndApplyClass();
+      this.mobile = false;
+    }, 100); 
+  }
+
   async ngOnInit() {
+
     if (typeof window !== 'undefined') {
     window.addEventListener('scroll', () => {
       this.onScrollOrResize();

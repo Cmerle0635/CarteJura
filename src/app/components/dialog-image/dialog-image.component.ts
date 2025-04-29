@@ -34,4 +34,8 @@ export class DialogImageComponent implements OnInit {
 
    public source: string = "";
    public alt: string = "";
+
+   closeDialog(evt: Event){
+    this.dialogRef.close();
+  }
 }

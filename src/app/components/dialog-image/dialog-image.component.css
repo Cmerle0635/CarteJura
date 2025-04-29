@@ -7,3 +7,17 @@
     max-height: 95vh;
     object-fit: contain;
 }
+
+.fermer {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    max-height: 25px;
+    word-wrap: break-word;
+    z-index: 100;
+}
+
+.fermer:hover{
+    cursor:pointer;
+}

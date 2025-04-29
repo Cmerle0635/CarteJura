@@ -1,4 +1,5 @@
 <mat-dialog-content>
-  <app-map class="test1"></app-map>
-  <div class="test"><app-panel-info [info]="info"></app-panel-info></div>
+  <app-map class="map"></app-map>
+  <div class="legend_info" id="legend"><app-panel-info [info]="info"></app-panel-info></div>
+  <img src="assets/images/logo_fermer.png" alt="Logo Fermer" class="fermer" id="fermer_logo" title="Fermer la fenêtre" (click)="closeDialog($event)">
 </mat-dialog-content>

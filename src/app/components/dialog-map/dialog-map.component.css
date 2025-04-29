@@ -6,7 +6,7 @@
     max-height: initial;
 }
 
-.test{
+.legend_info{
     padding: 10px;
     display: block;
     position: absolute;
@@ -14,7 +14,43 @@
     top: 30px;
     right: 30px;
     height: 90vh - 60px;
-    background-color: rgb(220, 220, 220, 0.5);
+    background-color: rgb(220, 220, 220, 0.6);
     width: 25%;
     word-wrap: break-word;
+}
+
+.legend_info_mob{
+    padding: 10px;
+    display: block;
+    position: absolute;
+    bottom: 25px;
+    top: 65%;
+    width: 80%;
+    height: 90vh - 60px;
+    background-color: rgb(255, 255, 255, 0.7);
+    word-wrap: break-word;
+}
+
+.fermer {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 70px;
+    max-height: 25px;
+    word-wrap: break-word;
+    z-index: 100;
+}
+
+.fermer:hover{
+    cursor:pointer;
+}
+
+.fermer_mob {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    max-height: 25px;
+    word-wrap: break-word;
+    z-index: 100;
 }

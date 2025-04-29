@@ -20,7 +20,7 @@
   }
 
   #manager{
-    max-height: 80vh; /* Adapte à l'écran */
+    max-height: 100%; /* Adapte à l'écran */
     max-width: auto;
     overflow-y: auto; /* Ajoute un scroll si nécessaire */      
   }
