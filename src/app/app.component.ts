@@ -45,14 +45,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   dataLoaded: boolean = false;
 
   images_carousel1 = [
-    'assets/cartes/carte_pointeau.png',
-    'assets/cartes/cartes_routes.png'
+    'assets/cartes/carte_pointeau.jpg',
+    'assets/cartes/cartes_routes.jpg'
   ];
   images_carousel2 = [
-    'assets/cartes/carte_temps.png',
-    'assets/cartes/carte_occ.png',
-    'assets/cartes/carte_temps_distance.png',
-    'assets/cartes/carte_voronoi_points.png'
+    'assets/cartes/carte_temps.jpg',
+    'assets/cartes/carte_occ.jpg',
+    'assets/cartes/carte_temps_distance.jpg',
+    'assets/cartes/carte_voronoi_points.jpg'
   ];
 
   onScrollOrResize() {
