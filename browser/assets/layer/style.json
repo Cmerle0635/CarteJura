@@ -1,0 +1,467 @@
+{
+  "0": {
+    "nom": "Présentation des points d'eau",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/Extent_EPCI.geojson",
+      "nom": "Etendu de l'EPCI",
+      "stroke": {
+        "color": "red",
+        "width": 5
+      },
+      "fill": {
+        "color": "transparent"
+      }
+    },
+    "1": {
+      "type": "Polygon",
+      "url": "/assets/data/Communes.geojson",
+      "nom": "Communes de l'EPCI",
+      "stroke": {
+        "color": "white",
+        "width": 3,
+        "lineDash": [4, 4]
+      },
+      "fill": {
+        "color": "transparent"
+      },
+      "text": {
+        "font": "bold 12px sans-serif",
+        "text": ["nomcom", "Pop"],
+        "color": "white",
+        "stroke": {
+            "color": "black",
+            "width": 3
+        }
+      }
+    },
+    "2": {
+        "type": "Points",
+        "url": "/assets/data/PointDeauWithID.geojson",
+        "nom": "Point d'Eau",
+        "icon": ["/assets/images/PointEau0.png", "/assets/images/PointEau1.png", "/assets/images/PointEau2.png" , "/assets/images/PointEau3.png"],
+        "icon_field": "id_pointeau",
+        "height": 40
+      }
+  },
+  "1":{
+    "nom": "Présentation des routes",
+    "0": {
+        "type": "Polygon",
+        "url": "/assets/data/Extent_EPCI.geojson",
+        "nom": "Etendu de l'EPCI",
+        "stroke": {
+          "color": "red",
+          "width": 5
+        },
+        "fill": {
+          "color": "transparent"
+        }
+      },
+    "1": {
+      "type": "Polygon",
+      "url": "/assets/data/Communes.geojson",
+      "nom": "Communes de l'EPCI",
+      "stroke": {
+        "color": "white",
+        "width": 3,
+        "lineDash": [4, 4]
+      },
+      "fill": {
+        "color": "transparent"
+      },
+      "text": {
+        "font": "bold 12px sans-serif",
+        "text": ["nomcom", "Pop"],
+        "color": "white",
+        "stroke": {
+            "color": "black",
+            "width": 3
+        }
+      }
+    },
+    "2": {
+      "type": "Line",
+      "url": "/assets/data/Routes.geojson",
+      "nom": "Routes de l'EPCI",
+      "field": "vitesse",
+      "stroke": {
+          "2": {
+          "color": "rgba(255,255,178,1)",
+          "width": 1
+          },
+          "5": {
+          "color": "rgba(254,219,117,1)",
+          "width": 2
+          },
+          "30": {
+          "color": "rgba(254,177,78,1)",
+          "width": 3
+          },
+          "40": {
+          "color": "rgba(251,129,56,1)",
+          "width": 4
+          },
+          "50": {
+          "color": "rgba(242,71,36)",
+          "width": 6
+          },
+          "70": {
+          "color": "rgba(211,25,35,1)",
+          "width": 8
+          },
+          "80": {
+          "color": "rgba(158,0,27,1)",
+          "width": 10
+          }
+      }
+    }
+  },
+  "2": {
+    "nom": "Zone d'influence des points d'eau",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiTemps.geojson",
+      "nom": "Zone d'influence",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(181,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(212,85,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(34,85,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,125,128,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "rgba(181,0,0,0.3)"
+        },
+        "1":{
+          "color": "rgba(212,85,0,0.3)"
+        },
+        "2":{
+          "color": "rgba(34,85,0,0.3)"
+        },
+        "3":{
+          "color": "rgba(0,125,128,0.3)"
+        }
+      }
+    },
+    "1": {
+        "type": "Points",
+        "url": "/assets/data/PointDeauWithID.geojson",
+        "nom": "Point d'Eau",
+        "icon": ["/assets/images/PointEau0.png", "/assets/images/PointEau1.png", "/assets/images/PointEau2.png" , "/assets/images/PointEau3.png"],
+        "icon_field": "id_pointeau",
+        "height": 20
+      }
+  },
+  "3": {
+    "nom": "Temps accès aux points d'eau",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/TempsAcces.geojson",
+      "nom": "Temps d'acces",
+      "field": "distcluste",
+      "stroke": {
+        "1-1":{
+          "color": "black",
+          "width": 1
+        },
+        "1-3":{
+          "color": "black",
+          "width": 1
+        },
+        "3-5":{
+          "color": "black",
+          "width": 1
+        },
+        "5-7":{
+          "color": "black",
+          "width": 1
+        },
+        "7-10":{
+          "color": "black",
+          "width": 1
+        },
+        "10-13":{
+          "color": "black",
+          "width": 1
+        },
+        "13-20":{
+          "color": "black",
+          "width": 1
+        }
+      },
+      "fill": {
+        "1-1":{
+          "color": "rgba(255,245,240,0.5)",
+          "width": 1
+        },
+        "1-3":{
+          "color": "rgba(255,165,160,0.5)",
+          "width": 1
+        },
+        "3-5":{
+          "color": "rgba(255,80,80,0.5)",
+          "width": 1
+        },
+        "5-7":{
+          "color": "rgba(255,0,0,0.5)",
+          "width": 1
+        },
+        "7-10":{
+          "color": "rgba(200,0,0,0.5)",
+          "width": 1
+        },
+        "10-13":{
+          "color": "rgba(150,0,0,0.5)",
+          "width": 1
+        },
+        "13-20":{
+          "color": "rgba(100,0,0,0.5)",
+          "width": 1
+        }
+      }
+    }
+  },
+  "4":{
+      "nom": "Occurence des routes",
+      "0": {
+        "type": "Polygon",
+        "url": "/assets/data/Extent_EPCI.geojson",
+        "nom": "Etendu de l'EPCI",
+        "stroke": {
+          "color": "rgba(0,235,0,1)",
+          "width": 5
+        },
+        "fill": {
+          "color": "transparent"
+        }
+      },
+      "1":{
+        "type": "Line",
+        "url": "/assets/data/Routes.geojson",
+        "nom": "Routes de l'EPCI",
+        "field": "occurence",
+        "stroke": {
+            "1-165": {
+            "color": "rgba(255,255,178,1)",
+            "width": 1
+            },
+            "165-1012": {
+            "color": "rgba(254,221,121,1)",
+            "width": 2
+            },
+            "495-1012": {
+            "color": "rgba(254,183,81,1)",
+            "width": 3
+            },
+            "1012-1611": {
+            "color": "rgba(253,141,60,1)",
+            "width": 4
+            },
+            "1611-2529": {
+            "color": "rgba(244,86,41,1)",
+            "width": 6
+            },
+            "2529-3571": {
+            "color": "rgba(223,39,34,1)",
+            "width": 8
+            },
+            "3571-6234": {
+            "color": "rgba(189,0,38,1)",
+            "width": 10
+            }
+        }
+      }
+  },
+  "5": {
+    "nom": "Comparaison des zones d'infleunce Temps vs Distance",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiTemps.geojson",
+      "nom": "Zone d'influence selon le Temps",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(181,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(212,85,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(34,85,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,125,128,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "rgba(181,0,0,0.3)"
+        },
+        "1":{
+          "color": "rgba(212,85,0,0.3)"
+        },
+        "2":{
+          "color": "rgba(34,85,0,0.3)"
+        },
+        "3":{
+          "color": "rgba(0,125,128,0.3)"
+        }
+      }
+    },
+    "1": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiDistance.geojson",
+      "nom": "Zone d'influence selon la Distance",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(170,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(182,109,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(0,0,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,0,125,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "transparent"
+        },
+        "1":{
+          "color": "transparent"
+        },
+        "2":{
+          "color": "transparent"
+        },
+        "3":{
+          "color": "transparent"
+        }
+      }
+    }
+  },
+  "6": {
+    "nom": "Comparaison des zones d'infleunce Temps vs Géométrie uniquement",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiTemps.geojson",
+      "nom": "Zone d'influence selon le Temps",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(181,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(212,85,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(34,85,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,125,128,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "rgba(181,0,0,0.3)"
+        },
+        "1":{
+          "color": "rgba(212,85,0,0.3)"
+        },
+        "2":{
+          "color": "rgba(34,85,0,0.3)"
+        },
+        "3":{
+          "color": "rgba(0,125,128,0.3)"
+        }
+      }
+    },
+    "1": {
+      "type": "Polygon",
+      "url": "/assets/data/VoronoiPoints.geojson",
+      "nom": "Zone d'influence selon la Géométrie des Points",
+      "field": "eau",
+      "stroke": {
+        "0":{
+          "color": "rgba(255,0,0,1)",
+          "width": 3
+        },
+        "1":{
+          "color": "rgba(255,255,0,1)",
+          "width": 3
+        },
+        "2":{
+          "color": "rgba(0,255,0,1)",
+          "width": 3
+        },
+        "3":{
+          "color": "rgba(0,255,255,1)",
+          "width": 3
+        }
+      },
+      "fill": {
+        "0":{
+          "color": "transparent"
+        },
+        "1":{
+          "color": "transparent"
+        },
+        "2":{
+          "color": "transparent"
+        },
+        "3":{
+          "color": "transparent"
+        }
+      }
+    }
+  },
+  "7": {
+    "nom": "Concentraction des noeuds",
+    "0": {
+      "type": "Polygon",
+      "url": "/assets/data/Extent_EPCI.geojson",
+      "nom": "Etendu de l'EPCI",
+      "stroke": {
+        "color": "red",
+        "width": 5
+      },
+      "fill": {
+        "color": "transparent"
+      }
+    },
+    "1": {
+      "type": "HeatMap",
+      "url": "/assets/data/ExportPoint.geojson",
+      "nom": "Concentraction"
+    }
+  }
+}
