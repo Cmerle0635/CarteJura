@@ -8,7 +8,7 @@
   <div id="info">Cartographie</div>
   <div id="title" class="desktop">La guerre des points d'eau dans le Jura !!!</div>
   <div id="info">Par Clément MERLE / Le 27-04-2025</div>
-  <div id="summary" class="desktop">Ce premier article présente une petite étude que j'ai faite sur la réparition des différents points d'eau sur l'EPCI de la Station des Rousses dans le Jura (39).</div>
+  <div id="summary" class="desktop">Ce premier article présente une petite étude que j'ai faite sur la répartition des différents points d'eau sur l'EPCI de la Station des Rousses dans le Jura (39).</div>
   <div id="container" class="desktop">
     <img src="https://live.staticflickr.com/454/32000466395_50f76cdae9_b.jpg" alt="Nature" style="width:100%;">
     <div class="text-block">
@@ -18,19 +18,19 @@
   <div id="content" class="desktop">
     <p class="subtitle">Introduction</p>
     <p>Depuis quelques temps maintenant, je voulais faire un projet perso sur l'une de mes passions, la géomatique. 
-      Travaillant récemment avec un algorythme servant à créer des Polygones de Voronoï, cela m'a donné une idée, 
+      Travaillant récemment avec un algorithme servant à créer des Polygones de Voronoï, cela m'a donné une idée, 
       faire une carte de proximité à l'aide de ces derniers, tout en se servant d'un Path Finding.</p>
     <p>Aimant bien aussi la randonnée, je voulais partir sur quelque chose en lien avec cette autre passion, mais qui n'était pas quelque chose de commercial, 
       (tout en étant accessible en open-source ... A revoir). L'idée à la base était donc de partir sur une <b>"guerre des bancs"</b> (Trouver quels étaient les bancs les plus accessibles 
-      au plus grand nombre de personnes). Néanmoins, du fait qu'il y a énormément de bancs, j'ai décidé de prendre un autre élément non-commercial ... <b>les points d'eau.</b></p>
+      au plus grand nombre de personnes). Néanmoins, du fait qu'il y a énormément de bancs, j'ai décidé de prendre un autre élément non commercial ... <b>les points d'eau.</b></p>
     <p>En cherchant différentes EPCI, sur laquelle faire cette étude, je me suis finalement arrêté sur celle de la <b>Communauté de Communes de la Station des Rousses-Haut Jura</b>,
        dans le Jura. Si vous vous posez la question, pourquoi cette dernière et voici les différents points qui m'ont motivé à la choisir :</p>
     <ul>
       <li>Faible nombre de points d'eau (4), cela permettra de faire une carte, nettement plus lisible.</li>
       <li>Relativement faible population (Avec 7212 habitants en 2021, c'était la 2ème EPCI la moins peuplée du département et au niveau national (Hors DROM-COM), 
-        elle se classait à la 1121ème place sur 1231) et étendu (Avec presque 99km², elle était la plus petite EPCI de son département et la 1188 moins étendue de France Métropolitaine (sur 1236)), 
+        elle se classait à la 1121ème place sur 1231) et étendue (Avec presque 99km², elle était la plus petite EPCI de son département et la 1188 moins étendue de France Métropolitaine (sur 1236)), 
         cela limite son nombre de routes, donc temps de calcul</li>
-      <li>Le Jura est un département relativement rural et réputé pour la randonnée, cela rentrait parfaitement dans le sujet sujet et cela permet aussi de mettre en valeur un territoire rural</li>
+      <li>Le Jura est un département relativement rural et réputé pour la randonnée, cela rentrait parfaitement dans le sujet et cela permet aussi de mettre en valeur un territoire rural</li>
       <li>Point Bonus : EPCI frontalière avec un autre pays.</li>
       <li>Point Bonus 2 : A fait partie d’un film récemment passé au cinéma (Un Ours dans le Jura).</li>
       <li>Point Bonus 3 : Il y a la principauté d'Arbézie en partie sur le territoire.</li>
@@ -44,12 +44,12 @@
     <p>Comme vous avez pu le voir, sur la carte, l'EPCI ne comporte que quatre villes (Ce qui est relativement rare en France (En 2024, 
       cela concernait 7 avec 4 villes ou moins, donc 2 avec seulement 3 communes) et se concentre surtout autour de son siège, la ville des Rousses 
       (Qui regroupe un peu plus de la moitié des habitants, avec 3683 habitants), connue pour être une station de sport d'Hiver. Etant dans le Jura, 
-      cette communauté de communes est contrasté par son relief. Son point le plus bas est à 720 mètres (Dans la commune des Rousses) et son plus haut, 
+      cette communauté de communes est contrastée par son relief. Son point le plus bas est à 720 mètres (Dans la commune des Rousses) et son plus haut, 
       est quant à lui à 1495m (Commune de Lamoura, avec le Crêt Pela).</p>
-    <p>Une fois ce choix d'EPCI fait, avec l'aide de l'API d'Open Street Map, j'ai téléchargé les différentes données liées aux routes et point d'eau des communes comprises de cette communauté de communes. 
-      Ce qui faisait en tout 4 points d'eau et  2308 éléments pour les routes. Du fait que pas mal, de routes n'avait pas de valeurs "highspeed" 
+    <p>Une fois ce choix d'EPCI fait, avec l'aide de l'API d'Open Street Map, j'ai téléchargé les différentes données liées aux routes et points d'eau des communes comprises de cette communauté de communes. 
+      Ce qui faisait en tout 4 points d'eau et  2308 éléments pour les routes. Du fait que pas mal de routes n'avaient pas de valeurs "highspeed" 
       (Et que cela m'intéressait particulièrement, du fait que le futur Path Finding sera pondéré selon cette valeur), 
-      j'ai du faire des modifications dans les données téléchargées pour qu'elles aient une valeur. Voici au final ce que cela donne :</p>
+      j'ai dû faire des modifications dans les données téléchargées pour qu'elles aient une valeur. Voici au final ce que cela donne :</p>
     <p></p>
     <app-chart *ngIf="dataLoaded"></app-chart>
     <p></p>
@@ -61,14 +61,14 @@
     <p>Et avec deux cartes, c'est encore mieux :</p>
     <app-carousel [images]='images_carousel1'></app-carousel>
     <p>
-      D'abrod la première chose que l'on peut voir cette carte, c'est qu'il y a deux points d'eau sur la même commune, celle de Bois d'Amont, cela est un cas plutôt intéressant je trouve, puisque cela va rajouter un peu de concurrence.
+      D'abord la première chose que l'on peut voir cette carte, c'est qu'il y a deux points d'eau sur la même commune, celle de Bois d'Amont, cela est un cas plutôt intéressant je trouve, puisque cela va rajouter un peu de concurrence.
     </p>
     <p>
       Ensuite sur les routes, on peut noter différents points :
     </p>
     <ul>
       <li>Réseau assez logique entre les villes de l'EPCI, avec des voies relativement rapides (> 50 km/h en majorité) et qui s'articulent surtout autour de la commune la plus peuplée de la Communauté de Communes</li>
-      <li>Hors des villes, cela est plutôt l'inverse avec beaucoup de routes à 30km/h (D'ailleurs elles représentes 72% du réseau routier) </li>
+      <li>Hors des villes, cela est plutôt l'inverse avec beaucoup de routes à 30km/h (D'ailleurs elles représentent 72% du réseau routier) </li>
       <li>Plusieurs axes parallèles (D25 / N5 - D29E2 / D415) pouvant faire jouer la concurrence</li>
     </ul>
     <p class="subtitle">La géométrie</p>
@@ -93,7 +93,7 @@
     </ul>
     <p>La question maintenant est … qu’est ce qu’on fait pour gérer cela ?    </p>
     <p>
-      Dans un premier temps, j’ai parcouru toutes nos routes, afin de prendre tous les points qui les composent et de les rendre unique et supprimer les doublons 
+      Dans un premier temps, j’ai parcouru toutes nos routes, afin de prendre tous les points qui les composent et de les rendre uniques et supprimer les doublons 
       (Pour faire cela, j’ai choisi de prendre une tolérance de 1 mètre).
       Une fois cela fait, j’ai encore une fois parcouru toutes les routes, pour extraire toutes leurs sections, en leur donnant ainsi, une origine et une extrémité avec l’ID de l’un de nos points uniques précédemment créés 
       (tout en gardant l’ID de la route à la base, ces sections appartenaient).
@@ -108,10 +108,10 @@
     </p>
     <p>
       Concernant ce troisième et dernier cas, la première tâche va être de savoir comment joindre ces points à leurs nouvelles lignes ? Dans un premier temps,
-      un tri va être fait, en suivant cette méthodologie, afin d’éliminer un par un les relations points / routes, tout en limitant au maximum le temps de traitement :
+      un tri va être fait, en suivant cette méthodologie, afin d’éliminer une par une les relations points / routes, tout en limitant au maximum le temps de traitement :
     </p>
     <ul>
-      <li>La distance du point avec le centroïde de la route route, doit être inférieure à la moitié de la longueur de la route.</li>
+      <li>La distance du point avec le centroïde de la route, doit être inférieure à la moitié de la longueur de la route.</li>
       <li>Les coordonnées du point doivent être inférieures aux XMax / YMax de la route et supérieures aux XMin / YMin.</li>
       <li>Le point doit se trouver dans la boîte englobante de la route.</li>
       <li>La distance perpendiculaire du point à la route doit être de mois d’un mètre.</li>
@@ -135,7 +135,7 @@
       <p style="font-size: 10px;">Temps (Minutes), Distance (Mètres), Vitesse Max (Km/h)</p></div>
     <p style="height: 5px"></p>
     <p>Une fois que l'on a cette dernière variable, il faut maintenant calculer pour tous nos différents points d'eau, 
-      quel est le noeud de nos routes qu'est le plus proche. Ensuite, on crée un graphique avec tous nos tronçons et enfin, 
+      quel noeud de nos routes est le plus proche. Ensuite, on crée un graphique avec tous nos tronçons et enfin, 
       on lance notre algo de path finding en mettant comme valeur de poids, celle que l'on vient de calculer. Bien entendu, pour chacun de nos noeuds,
       on lance l'algo 4 fois (une fois par point d'eau) et on garde la valeur la plus faible, pour déterminer quel est le point d'eau le plus proche de notre noeud.
     </p>
@@ -151,7 +151,7 @@
       De cet export, on peut déjà tirer plusieurs conclusions :
     </p>
     <ul>
-      <li>Il n'y a pas vraiment eu de concurrence entres les points numéro 2 et 3, puisqu'elles étaient beaucoup trop proche pour que cela n'ait lieu et le 2 a pris toute la priorité sur le 3.</li>
+      <li>Il n'y a pas vraiment eu de concurrence entres les points numéro 2 et 3, puisqu'ils étaient beaucoup trop proches pour que cela n'ait lieu et le 2 a pris toute la priorité sur le 3.</li>
       <li>Le point numéro 4 a su le mieux se développer, du fait qu'il n'y a aucun autre point d'eau au Sud, sur la commune de Lamoura, néanmoins, il a eu d'avantage de concurrence avec le 1, particulièrement au Sud et un peu moins au Nord.</li>
       <li>Enfin le point numéro 1 a su plutôt bien tirer des avantages de sa centralité.</li>
     </ul>
@@ -162,18 +162,18 @@
     <p>Ces différentes cartes peuvent bien entendu, nous éclairer encore un peu plus sur la situation.</p>
     <ul>
       <li>
-        La première carte montre le temps d'accès aux points d'eau des différents noeuds, le tout regroupé en cluster. Et on peut voir que plus on s'éloigne de nos axes principaux, plus le temps augmente assez rapidement. 
-        Cela est d'ailleurs le cas pour la zone au Sud entre les points 1/4, car malgré une concurrence assez forte entre ses deux points, le temps pour accéder au point d'eau est relativmeent important, du fait que les routes ne sont pas vraiments directes.
-        L'autre éléments que l'on peut distinguer, est le cas de la commune de Lamoura, du fait qu'elle n'a pas de point d'eau sur son territoire et que le plus proche est celui de la commune de Preymanon, l'ensemble de son territoire a des valeurs relatrivements importantes.
+        La première carte montre le temps d'accès aux points d'eau depuis les différents noeuds, le tout regroupé en cluster. Et on peut voir que plus on s'éloigne de nos axes principaux, plus le temps augmente assez rapidement. 
+        Cela est d'ailleurs le cas pour la zone au Sud entre les points 1/4, car malgré une concurrence assez forte entre ces deux points, le temps pour accéder au point d'eau est relativement important, du fait que les routes ne sont pas vraiment directes.
+        L'autre élément que l'on peut distinguer, est le cas de la commune de Lamoura, du fait qu'elle n'a pas de point d'eau sur son territoire et que le plus proche est celui de la commune de Preymanon, l'ensemble de son territoire a des valeurs relativement importantes.
       </li>
       <li>
-        La seconde présente le nombre d'occurences minimale (par route) de chaque noeud dans le Path Finding. Plus une valeur est importante, plus elle a donc à servi à étendre l'influence du point d'eau, auquel le noeud est rattaché. 
+        La seconde présente le nombre minimal d'occurences (par route) de chaque noeud dans le Path Finding. Plus une valeur est importante, plus elle a donc à servi à étendre l'influence du point d'eau, auquel le noeud est rattaché. 
         Sans surprise, les routes aux alentours du point d'eau numéro 3 ont des valeurs très faibles. Concernant les autres, on peut voir que le point numéro 3, a su plutôt étendre son territoire à l'aide d'un réseau en étoile, ce qui est plutôt logique du fait que la commune des Rousses est à la fois
-        le siège de l'EPCI, mais aussi sa commune la peuplée, donc celle qui est le mieux reliée au réseau routier. Quant au point numéro 4, du fait que c'est le point avec la plus grande d'influence, rien de surprenant à ce que ses routes aient été utilisés le plus grand nombre de fois et l'axe majoritaire est celui qui va vers la commune de Laomura.
+        le siège de l'EPCI, mais aussi sa commune la peuplée, donc celle qui est le mieux reliée au réseau routier. Quant au point numéro 4, du fait que c'est le point avec la plus grande d'influence, rien de surprenant à ce que ses routes aient été utilisées le plus grand nombre de fois et l'axe majoritaire est celui qui va vers la commune de Laomura.
       </li>
       <li>
-        Enfin la troisième carte, elle sert à montrer la différence entre un algo de path finding, basé sur une variable de temps (comme vu plus haut) et un autre basé uniquement sur la longueur des routes, donc quel que soit la vitesse à laquelle on se déplace dessus, tant qu'elle est homogène entre toutes les routes. La première chose que l'on peut s'apercevoir ...
-        c'est qu'il n'y a pas une grande différence ... mise à part pour le point 1, qui a su mieux tirer son épingle du jeu grêce de sa place centrale dans l'EPCI et sa proximité avec des routes avec une valeur relativement élevée.
+        Enfin la troisième carte, elle sert à montrer la différence entre un algo de path finding, basé sur une variable de temps (comme vu plus haut) et un autre basé uniquement sur la longueur des routes, donc quelle que soit la vitesse à laquelle on se déplace dessus, tant qu'elle est homogène entre toutes les routes. La première chose dont on peut s'apercevoir ...
+        c'est qu'il n'y a pas une grande différence ... mis à part pour le point 1, qui a su mieux tirer son épingle du jeu grâce à sa place centrale dans l'EPCI et sa proximité avec des routes avec une valeur relativement élevée.
       </li>
       <li>Quant à la dernière carte, elle sert à montrer la différence entre un algo pondéré par des valeurs (et avec path finding avant) et un algo de Voronoï se basant uniquement sur la position des points d'eau, et les différentes entre les deux cartes sont flagrantes.</li>
     </ul>
@@ -182,13 +182,13 @@
     <ul>
       <li><b>Jointure entre lignes</b> : Créer des liens entre tous les éléments se croisant, sans vérifier. Cela peut fausser les relations, par exemple : un pont piéton passant par dessus une autoroute</li>
       <li><b>Calcul de la vitesse maximum sur les routes</b> : Vu que cela a été fait, en se basant essentiellement sur des vitesses théoriques (Ex : Pour les chemins) et/ou sur des panneaux de limitation sur Google Street View, 
-      cette valeur a quand même une certaine forte probabilité d'être fausse. Le mieux aurait été de se baser sur des valeurs officielles</li>
+      cette valeur a quand même une forte probabilité d'être fausse. Le mieux aurait été de se baser sur des valeurs officielles</li>
       <li><b>Relation Point / Route Cas numéro 4</b> : Je n'ai pas traité un cas (Lorsque j'ai fait le lien entre mes différentes routes), c'en est un qui se rapproche relativement du cas numéro 3, ce sont les points relativements proches, 
-      mais pas directement ou à moins d'un mètre d'une route déjà existance. Je ne l'ai pas fait, puisque c'était beaucoup plus difficile à faire que ce que j'ai déjà fait et nécessité une vérification pour chaque point, au vu de la problématique.</li>
-      <li><b>Les relations extérieures</b> : Je n'ai pas vraiement pris en compte, les relations de l'EPCI avec son extérieur (par exemple, routes faisant sortant de mon EPCI et y rentrant après / Influence d'autres points d'eaux proches)</li>
-      <li><b>Le relief</b> : Du fait qu'on est en plein d'un massif montagneux, le Jura, cela aurait pu être intéressant de prendre en compte le dénivelé de la route, du fait que cela jouerait un peu sur les temps. Idem pour les virages ...</li>
-      <li><b>Les éléments liés aux routes</b> : Un autre facteur pour impacter sur le temps, sont les éléments qui sont liés aux routes (Ex : Feu tricolore, passage piéton).</li>
-      <li><b>Choix de l’EPCI</b> : Prendre une autre EPCI, avec un réseau routier plus complet (Moins en étoile / Plusieurs pôles / Avec d’avantages d’axes principaux).</li>
+      mais pas directement ou à moins d'un mètre d'une route déjà existante. Je ne l'ai pas fait, puisque c'était beaucoup plus difficile à faire que ce que j'ai déjà fait et nécessitait une vérification pour chaque point, au vu de la problématique.</li>
+      <li><b>Les relations extérieures</b> : Je n'ai pas vraiment pris en compte, les relations de l'EPCI avec son extérieur (par exemple, routes sortant de mon EPCI et y rentrant après / Influence d'autres points d'eaux proches)</li>
+      <li><b>Le relief</b> : Etant donné qu'on est au milieu d'un massif montagneux, le Jura, cela aurait pu être intéressant de prendre en compte le dénivelé de la route, du fait que cela jouerait un peu sur les temps. Idem pour les virages ...</li>
+      <li><b>Les éléments liés aux routes</b> : Un autre facteur pouvant impacter sur le temps, sont les éléments qui sont liés aux routes (Ex : Feu tricolore, passage piéton).</li>
+      <li><b>Choix de l’EPCI</b> : Prendre une autre EPCI, avec un réseau routier plus complet (Moins en étoile / Plusieurs pôles / Avec davantage d’axes principaux).</li>
       <li><b>A compléter</b> :  Prendre des données de population (Ex : Carroyage) pour savoir quel est le point d'eau avec le plus d' "attractivité", j'ai essayé de me baser sur des données Open Street Map, mais je n'ai pas trouvé cela vraiment concluant.</li>
     </ul>
     <p class="subtitle">Les technos utilisées</p>
@@ -207,7 +207,14 @@
       <li>svgdotjs : Pour la construction de certaines des légendes</li>
       <li>Openlayers : Pour la carto</li>
     </ul>
-  </div>  
+    <p class="subtitle">Glossaire : </p>
+    <ul>
+      <li><b>EPCI : </b>(Aussi appelé Établissement Public de Coopération Intercommunale) C'est une structure administrative en France qui regroupe plusieurs communes pour exercer certaines compétences ensemble 1. Cela permet aux communes de collaborer sur des projets communs comme la gestion des déchets, les transports, ou l'aménagement du territoire (Ex : Communauté de communes / D'agglomération / Métropoles).</li>
+      <li><b>Open Street Map : </b>C'est un projet collaboratif de cartographie en ligne qui vise à créer une base de données géographiques libre et ouverte du monde entier.</li>
+      <li><b>Centroïde : </b>Terme utilisé en mathématiques et en géométrie pour désigner le centre de masse ou le centre de gravité d'une figure géométrique.</li>
+      <li><b>Polygone de Voronoï : </b>C'est une région d'un diagramme de Voronoï, qui est une manière de diviser un espace en plusieurs zones en fonction de la distance à un ensemble de points. Chaque polygone de Voronoï contient tous les points qui sont plus proches de son germe que de tout autre point.</li>
+    </ul>
+  </div> 
   
 </main>
 
