@@ -1,0 +1,10 @@
+Limites / Ouverture suite à cette étude :
+
+-	Jointure entre lignes : Créer des liens entre tous les éléments se croisant, sans vérifier. Cela peut fausser les relations, par exemple : un pont piéton passant par dessus une autoroute
+-	Calcul de la vitesse maximum sur les routes : Vu que cela a été fait, en se basant essentiellement sur des vitesses théoriques (Ex : Pour les chemins) et/ou sur des panneaux de limitation sur Google Street View, cette valeur a quand même une certaine forte probabilité d'être fausse. Le mieux aurait été de se baser sur des valeurs officielles
+-	Relation Point / Route Cas numéro 4 : Je n'ai pas traité un cas (Lorsque j'ai fait le lien entre mes différentes routes), c'en est un qui se rapproche relativement du cas numéro 3, ce sont les points relativements proches, mais pas directement ou à moins d'un mètre d'une route déjà existance. Je ne l'ai pas fait, puisque c'était beaucoup plus difficile à faire que ce que j'ai déjà fait et nécessité une vérification pour chaque point, au vu de la problématique.
+-	Les relations extérieures : Je n'ai pas vraiement pris en compte, les relations de l'EPCI avec son extérieur (par exemple, routes faisant sortant de mon EPCI et y rentrant après / Influence d'autres points d'eaux proches)
+-	Le relief : Du fait qu'on est en plein d'un massif montagneux, le Jura, cela aurait pu être intéressant de prendre en compte le dénivelé de la route, du fait que cela jouerait un peu sur les temps. Idem pour les virages ...
+-	Les éléments liés aux routes : Un autre facteur pour impacter sur le temps, sont les éléments qui sont liés aux routes (Ex : Feu tricolore, passage piéton)
+-	Choix de l’EPCI : Prendre une autre EPCI, avec un réseau routier plus complet (Moins en étoile / Plusieurs pôles / Avec d’avantages d’axes principaux)
+-	A compléter :  Prendre des données de population (Ex : Carroyage) pour savoir quel est le point d'eau avec le plus d' "attractivité", j'ai essayé de me baser sur des données Open Street Map, mais je n'ai pas trouvé cela vraiment concluant.
